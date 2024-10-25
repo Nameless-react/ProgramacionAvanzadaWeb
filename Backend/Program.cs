@@ -18,6 +18,8 @@ builder.Services.AddDbContext<ProyectoWebAvanzadaContext>();
 builder.Services.AddScoped<IUnidadDeTrabajo, UnidadDeTrabajo>();
 builder.Services.AddScoped<IEmployeeDAL, EmployeeDALImpl>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<IClientDAL, ClientDALImpl>();
+builder.Services.AddScoped<IClientService, ClientService>();
 
 #endregion
 

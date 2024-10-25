@@ -10,6 +10,8 @@ namespace DAL.Interfaces
     {
         IEmployeeDAL EmployeeDAL { get; }
 
+        IClientDAL ClientDAL { get; }
+
         bool Complete();
     }
 }
