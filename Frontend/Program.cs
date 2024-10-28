@@ -1,7 +1,16 @@
+using Frontend.Helpers.Interface;
+using FrontEnd.Helpers.Implementations;
+using FrontEnd.Helpers.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpClient<IServiceRepository, ServiceRepository>(); 
+builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+builder.Services.AddScoped<IEmployeeHelper, EmployeeHelper>();
+
 
 var app = builder.Build();
 
