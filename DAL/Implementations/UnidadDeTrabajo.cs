@@ -14,17 +14,21 @@ namespace DAL.Implementations
 
         public IClientDAL ClientDAL { get; set; }
 
+        public IAccountDAL AccountDAL { get; set; }
+
         private ProyectoWebAvanzadaContext _proyectoWebAvanzada;
 
         public UnidadDeTrabajo(ProyectoWebAvanzadaContext proyectoWebAvanzadaContext,
                         IEmployeeDAL employeesDAL,
-                        IClientDAL clientDAL
+                        IClientDAL clientDAL,
+                        IAccountDAL accountDAL
 
             ) 
         {
                 this._proyectoWebAvanzada = proyectoWebAvanzadaContext;
                 this.EmployeeDAL = employeesDAL;
             this.ClientDAL = clientDAL;
+            this.AccountDAL = accountDAL;
 
         }
        
