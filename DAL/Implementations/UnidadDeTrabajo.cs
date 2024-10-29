@@ -5,20 +5,22 @@ public class UnidadDeTrabajo : IUnidadDeTrabajo
 {
     public IEmployeeDAL EmployeeDAL { get; set; }
     public IClientDAL ClientDAL { get; set; }
-    public IAccountDAL AccountDAL { get; set; } // Agregado para Account
+    public IAccountDAL AccountDAL { get; set; }
 
-    private readonly ProyectoWebAvanzadaContext _proyectoWebAvanzada;
+        private ProyectoWebAvanzadaContext _proyectoWebAvanzada;
+
 
     public UnidadDeTrabajo(ProyectoWebAvanzadaContext proyectoWebAvanzadaContext,
                            IEmployeeDAL employeesDAL,
                            IClientDAL clientDAL,
-                           IAccountDAL accountDAL) // Asegúrate de recibir AccountDAL
+                           IAccountDAL accountDAL) 
     {
         this._proyectoWebAvanzada = proyectoWebAvanzadaContext;
         this.EmployeeDAL = employeesDAL;
         this.ClientDAL = clientDAL;
-        this.AccountDAL = accountDAL; // Asignar AccountDAL
+        this.AccountDAL = accountDAL; 
     }
+
 
     public bool Complete()
     {
@@ -29,7 +31,7 @@ public class UnidadDeTrabajo : IUnidadDeTrabajo
         }
         catch (Exception e)
         {
-            // Manejar el error si es necesario
+           
             return false;
         }
     }
