@@ -11,9 +11,11 @@ namespace DAL.Interfaces
         IEmployeeDAL EmployeeDAL { get; }
 
         IClientDAL ClientDAL { get; }
+        IAccountDAL AccountDAL { get; }
 
         IAccountDAL AccountDAL { get; }
 
         bool Complete();
     }
 }
+
