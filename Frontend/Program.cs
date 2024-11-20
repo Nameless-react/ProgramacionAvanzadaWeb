@@ -1,3 +1,4 @@
+using Frontend.Helpers.Implementations;
 using Frontend.Helpers.Interface;
 using FrontEnd.Helpers.Implementations;
 using FrontEnd.Helpers.Interfaces;
@@ -10,6 +11,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient<IServiceRepository, ServiceRepository>(); 
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IEmployeeHelper, EmployeeHelper>();
+builder.Services.AddScoped<IClientHelper, ClientHelper>();
 
 
 var app = builder.Build();
