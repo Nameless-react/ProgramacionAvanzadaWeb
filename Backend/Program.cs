@@ -23,6 +23,7 @@ builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IAccountDAL, AccountDALImpl>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 
+
 #endregion
 
 var app = builder.Build();
