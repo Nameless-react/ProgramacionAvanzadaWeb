@@ -1,0 +1,56 @@
+﻿@model Frontend.Models.AccountViewModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Eliminar Cuenta</h1>
+
+<h3>Esta seguro que desea eliminar esta cuenta?</h3>
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AccountId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AccountId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AccountNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AccountNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ClientId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ClientId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AccountTypeId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AccountTypeId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Balance)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Balance)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OpeningDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OpeningDate)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        @Html.HiddenFor(Model => Model.AccountId)
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index">Volver a la lista de Cuentas</a>
+    </form>
+
+</div>
