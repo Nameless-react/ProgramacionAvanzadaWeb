@@ -13,13 +13,13 @@ namespace Frontend.Models
         [DisplayName("Apellido")]
         public string LastName { get; set; } = null!;
 
-        [DisplayName("FechaNacimiento")]
+        [DisplayName("Fecha de Nacimiento")]
         public DateOnly? DateOfBirth { get; set; }
 
         [DisplayName("Telefono")]
         public string? Phone { get; set; }
 
-        [DisplayName("Correo")]
+        [DisplayName("Correo Electronico")]
         public string? Email { get; set; }
 
         [DisplayName("Direccion")]
@@ -31,7 +31,7 @@ namespace Frontend.Models
         [DisplayName("Pais")]
         public string? Country { get; set; }
 
-        [DisplayName("FechaRegistro")]
+        [DisplayName("Fecha de Registro")]
         public DateTime? RegistrationDate { get; set; }
     }
 }
