@@ -12,6 +12,7 @@ builder.Services.AddHttpClient<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IEmployeeHelper, EmployeeHelper>();
 builder.Services.AddScoped<IClientHelper, ClientHelper>();
+builder.Services.AddScoped<IAccountHelper, AccountHelper>();
 
 
 var app = builder.Build();
