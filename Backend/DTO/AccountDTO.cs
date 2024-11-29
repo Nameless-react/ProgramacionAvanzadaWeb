@@ -16,9 +16,13 @@ namespace Backend.DTO
 
         public DateTime? OpeningDate { get; set; }
 
-        public virtual AccountType AccountType { get; set; } = null!;
+         public string FirstName { get; set; }
 
-        public virtual Client Client { get; set; } = null!;
+        public string typeName { get; set; }
+
+        public string email { get; set; }
+
+        public string phone { get; set; }
 
         public virtual ICollection<Transaction> TransactionDestinationAccounts { get; set; } = new List<Transaction>();
 

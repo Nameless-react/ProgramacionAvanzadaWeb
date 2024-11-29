@@ -18,13 +18,7 @@ namespace Backend.Services.Implementations
 
         private Account Convertir(AccountDTO accountDTO)
         {
-            if (string.IsNullOrEmpty(accountDTO.AccountNumber))
-                throw new ArgumentException("Numero de cuenta no puede ser nulo o vacío");
-            if (accountDTO.ClientId <= 0)
-                throw new ArgumentException("El Id del cliente debe ser mayor que cero");
 
-            if (accountDTO.AccountTypeId <= 0)
-                throw new ArgumentException("El id de la cuenta debe ser mayor que cero");
             return new Account
             {
                 AccountId = accountDTO.AccountId,
@@ -44,7 +38,11 @@ namespace Backend.Services.Implementations
                 AccountNumber = account.AccountNumber,
                 ClientId = account.ClientId,
                 AccountTypeId = account.AccountTypeId,
-                Balance = account.Balance, 
+                Balance = account.Balance,
+                FirstName = account.Client.FirstName,
+                email = account.Client.Email,
+                phone = account.Client.Phone,
+                typeName = account.AccountType.AccountTypeName,
                 OpeningDate = account.OpeningDate
             };
         }
@@ -64,7 +62,7 @@ namespace Backend.Services.Implementations
         public List<AccountDTO> GetAll()
         {
             List<AccountDTO> list = new List<AccountDTO>();
-            var accounts = Unidad.AccountDAL.GetAll().ToList();
+            var accounts = Unidad.AccountDAL.GetAll(d => d.Client, c => c.AccountType).ToList();
 
             foreach (var item in accounts)
             {
