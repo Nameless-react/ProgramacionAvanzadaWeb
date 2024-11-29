@@ -30,7 +30,7 @@ namespace Frontend.Helpers.Implementations
 
         public AccountViewModel Add(AccountViewModel account)
         {
-            HttpResponseMessage response = _serviceRepository.PostResponse("api/Account", Convert(account));
+            HttpResponseMessage response = _serviceRepository.PostResponse("api/Accounts", Convert(account));
             if (response.IsSuccessStatusCode)
             {
                 var content = response.Content.ReadAsStringAsync().Result;
@@ -40,7 +40,7 @@ namespace Frontend.Helpers.Implementations
 
         public void Delete(int id)
         {
-            HttpResponseMessage responseMessage = _serviceRepository.DeleteResponse("api/Account/" + id.ToString());
+            HttpResponseMessage responseMessage = _serviceRepository.DeleteResponse("api/Accounts/" + id.ToString());
             if (responseMessage.IsSuccessStatusCode)
             {
                 var content = responseMessage.Content;
@@ -49,7 +49,7 @@ namespace Frontend.Helpers.Implementations
 
         public List<AccountViewModel> GetAccounts()
         {
-            HttpResponseMessage responseMessage = _serviceRepository.GetResponse("api/Account");
+            HttpResponseMessage responseMessage = _serviceRepository.GetResponse("api/Accounts");
             List<Account> accounts = new List<Account>();
             if (responseMessage != null)
             {
@@ -78,7 +78,7 @@ namespace Frontend.Helpers.Implementations
 
         public AccountViewModel GetAccount(int? id) 
         {
-            HttpResponseMessage responseMessage = _serviceRepository.GetResponse("api/Account/" + id.ToString());
+            HttpResponseMessage responseMessage = _serviceRepository.GetResponse("api/Accounts/" + id.ToString());
             Account account = new Account();
             if (responseMessage != null) 
             {
@@ -101,7 +101,7 @@ namespace Frontend.Helpers.Implementations
 
         public AccountViewModel Update(AccountViewModel account) 
         {
-            HttpResponseMessage response = _serviceRepository.PutResponse("api/Account" + account.AccountId.ToString(), Convert(account));
+            HttpResponseMessage response = _serviceRepository.PutResponse("api/Accounts" + account.AccountId.ToString(), Convert(account));
             if (response.IsSuccessStatusCode) 
             {
                 var content = response.Content.ReadAsStringAsync().Result;
