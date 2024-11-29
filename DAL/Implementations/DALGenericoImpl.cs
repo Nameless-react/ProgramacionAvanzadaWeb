@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,9 +42,17 @@ namespace DAL.Implementations
             return _proyectoWebAvanzada.Set<TEntity>().Find(id);
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public IEnumerable<TEntity> GetAll(params Expression<Func<TEntity, object>>[] includes)
         {
-            return _proyectoWebAvanzada.Set<TEntity>().ToList();
+            var query = _proyectoWebAvanzada.Set<TEntity>().AsQueryable();
+
+            // Agregar las relaciones especificadas
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+
+            return query.ToList();
         }
 
         public bool Remove(TEntity entity)

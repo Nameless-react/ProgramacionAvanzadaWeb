@@ -45,6 +45,11 @@ namespace Backend.Services.Implementations
                 ClientId = account.ClientId,
                 AccountTypeId = account.AccountTypeId,
                 Balance = account.Balance,
+                FirstName = account.Client.FirstName,
+                email = account.Client.Email,
+                phone = account.Client.Phone,
+                typeName = account.AccountType.AccountTypeName,
+
                 OpeningDate = account.OpeningDate
             };
         }
@@ -64,7 +69,7 @@ namespace Backend.Services.Implementations
         public List<AccountDTO> GetAll()
         {
             List<AccountDTO> list = new List<AccountDTO>();
-            var accounts = Unidad.AccountDAL.GetAll().ToList();
+            var accounts = Unidad.AccountDAL.GetAll(d => d.Client, c => c.AccountType).ToList();
 
             foreach (var item in accounts)
             {
