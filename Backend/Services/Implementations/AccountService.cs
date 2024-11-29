@@ -39,11 +39,6 @@ namespace Backend.Services.Implementations
                 ClientId = account.ClientId,
                 AccountTypeId = account.AccountTypeId,
                 Balance = account.Balance,
-                FirstName = account.Client.FirstName,
-                email = account.Client.Email,
-                phone = account.Client.Phone,
-                typeName = account.AccountType.AccountTypeName,
-
                 OpeningDate = account.OpeningDate
             };
         }
