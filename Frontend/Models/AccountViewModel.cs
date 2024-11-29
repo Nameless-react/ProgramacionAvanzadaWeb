@@ -21,5 +21,7 @@ namespace Frontend.Models
 
         [DisplayName("Fecha de Apertura")]
         public DateTime? OpeningDate { get; set; }
+
+   
     }
 }

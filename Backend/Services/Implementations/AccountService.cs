@@ -18,6 +18,13 @@ namespace Backend.Services.Implementations
 
         private Account Convertir(AccountDTO accountDTO)
         {
+            if (string.IsNullOrEmpty(accountDTO.AccountNumber))
+                throw new ArgumentException("Numero de cuenta no puede ser nulo o vacío");
+            if (accountDTO.ClientId <= 0)
+                throw new ArgumentException("El Id del cliente debe ser mayor que cero");
+
+            if (accountDTO.AccountTypeId <= 0)
+                throw new ArgumentException("El id de la cuenta debe ser mayor que cero");
             return new Account
             {
                 AccountId = accountDTO.AccountId,
@@ -44,8 +51,8 @@ namespace Backend.Services.Implementations
 
         public bool Add(AccountDTO accountDTO)
         {
-            var entity = Convertir(accountDTO);
-            object value = Unidad.AccountDAL.Add(entity);
+            Account entity = Convertir(accountDTO);
+            Unidad.AccountDAL.Add(entity);
             return Unidad.Complete();
         }
 

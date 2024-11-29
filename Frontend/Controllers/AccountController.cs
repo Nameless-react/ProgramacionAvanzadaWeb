@@ -39,7 +39,7 @@ namespace Frontend.Controllers
                 _accountHelper.Add(account);
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception e) 
+            catch 
             {
                 return View();
             }
@@ -60,7 +60,7 @@ namespace Frontend.Controllers
                 _accountHelper.Update(account);
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception e) 
+            catch 
             {
                 return View();
             }
