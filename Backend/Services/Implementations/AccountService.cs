@@ -44,7 +44,7 @@ namespace Backend.Services.Implementations
                 AccountNumber = account.AccountNumber,
                 ClientId = account.ClientId,
                 AccountTypeId = account.AccountTypeId,
-                Balance = account.Balance,
+                Balance = account.Balance, 
                 OpeningDate = account.OpeningDate
             };
         }
