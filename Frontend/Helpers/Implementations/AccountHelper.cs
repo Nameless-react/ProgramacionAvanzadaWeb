@@ -10,6 +10,10 @@ namespace Frontend.Helpers.Implementations
     {
         IServiceRepository _serviceRepository;
 
+        public AccountHelper(IServiceRepository serviceRepository)
+        {
+            _serviceRepository = serviceRepository;
+        }
         Account Convert(AccountViewModel account)
         {
             return new Account
@@ -23,10 +27,6 @@ namespace Frontend.Helpers.Implementations
             };
         }
 
-        public AccountHelper(IServiceRepository serviceRepository)
-        {
-            _serviceRepository = serviceRepository;
-        }
 
         public AccountViewModel Add(AccountViewModel account)
         {
@@ -101,7 +101,7 @@ namespace Frontend.Helpers.Implementations
 
         public AccountViewModel Update(AccountViewModel account) 
         {
-            HttpResponseMessage response = _serviceRepository.PutResponse("api/Account", Convert(account));
+            HttpResponseMessage response = _serviceRepository.PutResponse("api/Account" + account.AccountId.ToString(), Convert(account));
             if (response.IsSuccessStatusCode) 
             {
                 var content = response.Content.ReadAsStringAsync().Result;

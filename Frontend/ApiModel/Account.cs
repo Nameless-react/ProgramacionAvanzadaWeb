@@ -13,5 +13,6 @@
         public decimal? Balance { get; set; }
 
         public DateTime? OpeningDate { get; set; }
+
     }
 }

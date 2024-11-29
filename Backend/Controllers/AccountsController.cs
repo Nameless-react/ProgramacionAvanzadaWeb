@@ -12,7 +12,7 @@ namespace Backend.Controllers
 
         public AccountsController(IAccountService accountService)
         {
-            _accountService = accountService;
+            this._accountService = accountService;
         }
 
         // GET: api/<AccountsController>
@@ -33,30 +33,28 @@ namespace Backend.Controllers
 
         // POST api/<AccountsController>
         [HttpPost]
-        public IActionResult Post([FromBody] AccountDTO accountDTO)
+        public void Post([FromBody] AccountDTO accountDTO)
         {
             _accountService.Add(accountDTO);
-            return Ok();
+
         }
 
         // PUT api/<AccountsController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] AccountDTO account)
+        public void Put(int id, [FromBody] AccountDTO account)
         {
             _accountService.Update(account);
-            return Ok();
         }
 
         // DELETE api/<AccountsController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public void Delete(int id)
         {
-            var account = new AccountDTO
+            AccountDTO account = new AccountDTO
             {
                 AccountId = id
             };
             _accountService.Remove(account);
-            return Ok();
         }
     }
 }
