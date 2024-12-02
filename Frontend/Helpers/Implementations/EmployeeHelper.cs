@@ -7,12 +7,14 @@ using System.ComponentModel;
 
 namespace FrontEnd.Helpers.Implementations
 {
-    public class EmployeeHelper :IEmployeeHelper
+    public class EmployeeHelper : IEmployeeHelper
     {
         IServiceRepository _ServiceRepository;
-
-        //hola
-        Employee Convert(EmployeeViewModel employee) 
+        public EmployeeHelper(IServiceRepository serviceRepository)
+        {
+            _ServiceRepository = serviceRepository;
+        }
+        Employee Convertir(EmployeeViewModel employee)
         {
             return new Employee
             {
@@ -25,75 +27,40 @@ namespace FrontEnd.Helpers.Implementations
                 Email = employee.Email,
                 HireDate = employee.HireDate,
                 Position = employee.Position
+
+
             };
         }
 
-        public EmployeeHelper (IServiceRepository serviceRepository) 
+        public EmployeeViewModel AddEmployee(EmployeeViewModel employee)
         {
-            _ServiceRepository = serviceRepository;
- 
-        }
-
-        public EmployeeViewModel AddEmployee(EmployeeViewModel employee) 
-        {
-            HttpResponseMessage response = _ServiceRepository.PostResponse("api/Employee",Convert(employee));
-            if (response.IsSuccessStatusCode) 
+            HttpResponseMessage response = _ServiceRepository.PostResponse("api/Employee", Convertir(employee));
+            if (response.IsSuccessStatusCode)
             {
                 var content = response.Content.ReadAsStringAsync().Result;
             }
             return employee;
         }
-        public void DeleteEmployee(int id) 
+
+        public void DeleteEmployee(int id)
         {
-            HttpResponseMessage responseMessage = _ServiceRepository.DeleteResponse("api/Employee" + id.ToString());
-            if (responseMessage.IsSuccessStatusCode) 
+            HttpResponseMessage responseMessage = _ServiceRepository.DeleteResponse("api/Employee/" + id.ToString());
+            if (responseMessage.IsSuccessStatusCode)
             {
                 var content = responseMessage.Content;
             }
         }
 
-        public List<EmployeeViewModel> GetEmployees() 
+        public EmployeeViewModel GetEmployee(int id)
         {
-            HttpResponseMessage responseMessage = _ServiceRepository.GetResponse("api/Employee");
-            List<Employee> employees = new List<Employee>();
-            if (responseMessage != null) 
-            {
-                var content = responseMessage.Content.ReadAsStringAsync().Result;
-                employees = JsonConvert.DeserializeObject<List<Employee>>(content);
-            }
-            List<EmployeeViewModel> result = new List<EmployeeViewModel>();
-
-            foreach (var item in employees) 
-            {
-                result.Add(
-                    new EmployeeViewModel 
-                    {
-                        EmployeeID = item.EmployeeID,
-                        FirstName = item.FirstName,
-                        LastName = item.LastName,
-                        IDNumber = item.IDNumber,
-                        Phone = item.Phone,
-                        Address = item.Address,
-                        Email = item.Email,
-                        HireDate = item.HireDate,
-                        Position = item.Position
-                    }
-                    );        
-            }
-
-            return result;
-        }
-
-        public EmployeeViewModel GetEmployee(int? id) 
-        {
-            HttpResponseMessage responseMessage = _ServiceRepository.GetResponse("api/Employee/"+id.ToString());
+            HttpResponseMessage responseMessage = _ServiceRepository.GetResponse("api/Employee/" + id.ToString());
             Employee employee = new Employee();
-            if (responseMessage != null) 
+            if (responseMessage != null)
             {
                 var content = responseMessage.Content.ReadAsStringAsync().Result;
                 employee = JsonConvert.DeserializeObject<Employee>(content);
             }
-            EmployeeViewModel result = new EmployeeViewModel 
+            EmployeeViewModel resultado = new EmployeeViewModel
             {
                 EmployeeID = employee.EmployeeID,
                 FirstName = employee.FirstName,
@@ -105,16 +72,48 @@ namespace FrontEnd.Helpers.Implementations
                 HireDate = employee.HireDate,
                 Position = employee.Position
             };
+            return resultado;
+        }
 
+        public List<EmployeeViewModel> GetEmployees()
+        {
+            HttpResponseMessage responseMessage = _ServiceRepository.GetResponse("api/Employee");
+            List<Employee> employees = new List<Employee>();
+            if (responseMessage != null)
+            {
+                var content = responseMessage.Content.ReadAsStringAsync().Result;
+                employees = JsonConvert.DeserializeObject<List<Employee>>(content);
+            }
+            List<EmployeeViewModel> result = new List<EmployeeViewModel>();
+            foreach (var item in employees)
+            {
+                result.Add(
+                    new EmployeeViewModel
+                    {
+                        EmployeeID = item.EmployeeID,
+                        FirstName = item.FirstName,
+                        LastName = item.LastName,
+                        IDNumber = item.IDNumber,
+                        Phone = item.Phone,
+                        Address = item.Address,
+                        Email = item.Email,
+                        HireDate = item.HireDate,
+                        Position = item.Position
+                    }
+                    );
+            }
             return result;
         }
 
-        public EmployeeViewModel UpdateEmployee(EmployeeViewModel employee) 
+
+
+        public EmployeeViewModel UpdateEmployee(EmployeeViewModel employee)
         {
-            HttpResponseMessage response = _ServiceRepository.PutResponse("api/Employee",Convert(employee));
-            if (response.IsSuccessStatusCode) 
+            HttpResponseMessage response = _ServiceRepository.PutResponse("api/Employee/" + employee.EmployeeID.ToString(), Convertir(employee));
+            if (response.IsSuccessStatusCode)
             {
                 var content = response.Content.ReadAsStringAsync().Result;
+
             }
             return employee;
         }

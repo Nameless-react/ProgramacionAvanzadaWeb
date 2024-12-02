@@ -24,7 +24,7 @@ namespace Backend.DTO
 
         public string? phone { get; set; }
     }
-    }
+}
 
 
 
