@@ -4,21 +4,26 @@ using Entities.Entities;
 public class UnidadDeTrabajo : IUnidadDeTrabajo
 {
     public IEmployeeDAL EmployeeDAL { get; set; }
+    public IAccountTypeDAL AccountTypeDAL { get; set; }
     public IClientDAL ClientDAL { get; set; }
     public IAccountDAL AccountDAL { get; set; }
+    
 
-        private ProyectoWebAvanzadaContext _proyectoWebAvanzada;
+    private ProyectoWebAvanzadaContext _proyectoWebAvanzada;
 
 
     public UnidadDeTrabajo(ProyectoWebAvanzadaContext proyectoWebAvanzadaContext,
                            IEmployeeDAL employeesDAL,
+                           IAccountTypeDAL accountTypeDAL,
                            IClientDAL clientDAL,
                            IAccountDAL accountDAL) 
     {
         this._proyectoWebAvanzada = proyectoWebAvanzadaContext;
         this.EmployeeDAL = employeesDAL;
         this.ClientDAL = clientDAL;
-        this.AccountDAL = accountDAL; 
+        this.AccountTypeDAL = accountTypeDAL;
+        this.AccountDAL = accountDAL;
+       
     }
 
 

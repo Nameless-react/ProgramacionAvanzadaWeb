@@ -15,9 +15,12 @@ namespace FrontEnd.Helpers.Implementations
 
         public ServiceRepository(HttpClient _client, IConfiguration configuration)
         {
+
             Client = _client;
-            string baseUrl = "http://localhost:5131" ;
+            string baseUrl = configuration.GetValue<string>("Backend:Url") ?? "";
+            string apiKey = configuration.GetValue<string>("Backend:ApiKey") ?? "";
             Client.BaseAddress = new Uri(baseUrl);
+            Client.DefaultRequestHeaders.Add("ApiKey", apiKey);
 
         }
         public HttpResponseMessage GetResponse(string url)

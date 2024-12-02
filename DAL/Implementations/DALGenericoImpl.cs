@@ -3,6 +3,7 @@ using Entities.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -36,9 +37,8 @@ namespace DAL.Implementations
             }
         }
 
-        public TEntity Get(int id)
+        public TEntity Get(int id, params Expression<Func<TEntity, object>>[] includes)
         {
-
             return _proyectoWebAvanzada.Set<TEntity>().Find(id);
         }
 
@@ -46,7 +46,6 @@ namespace DAL.Implementations
         {
             var query = _proyectoWebAvanzada.Set<TEntity>().AsQueryable();
 
-            // Agregar las relaciones especificadas
             foreach (var include in includes)
             {
                 query = query.Include(include);

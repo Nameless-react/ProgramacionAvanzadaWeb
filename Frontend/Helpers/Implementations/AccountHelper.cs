@@ -9,6 +9,8 @@ namespace Frontend.Helpers.Implementations
     public class AccountHelper : IAccountHelper
     {
         IServiceRepository _serviceRepository;
+        public string Token { get; set; }
+
 
         public AccountHelper(IServiceRepository serviceRepository)
         {
@@ -49,6 +51,8 @@ namespace Frontend.Helpers.Implementations
 
         public List<AccountViewModel> GetAccounts()
         {
+
+            _serviceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
             HttpResponseMessage responseMessage = _serviceRepository.GetResponse("api/Accounts");
             List<Account> accounts = new List<Account>();
             if (responseMessage != null)
@@ -101,7 +105,7 @@ namespace Frontend.Helpers.Implementations
 
         public AccountViewModel Update(AccountViewModel account) 
         {
-            HttpResponseMessage response = _serviceRepository.PutResponse("api/Accounts" + account.AccountId.ToString(), Convert(account));
+            HttpResponseMessage response = _serviceRepository.PutResponse("api/Accounts/" + account.AccountId.ToString(), Convert(account));
             if (response.IsSuccessStatusCode) 
             {
                 var content = response.Content.ReadAsStringAsync().Result;

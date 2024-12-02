@@ -9,10 +9,10 @@ namespace DAL.Interfaces
     public interface IUnidadDeTrabajo: IDisposable
     {
         IEmployeeDAL EmployeeDAL { get; }
-
+        IAccountTypeDAL AccountTypeDAL { get; }
         IClientDAL ClientDAL { get; }
         IAccountDAL AccountDAL { get; }
-
+        
 
         bool Complete();
     }

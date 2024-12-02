@@ -43,7 +43,6 @@ namespace Backend.Services.Implementations
                 email = account.Client.Email,
                 phone = account.Client.Phone,
                 typeName = account.AccountType.AccountTypeName,
-
                 OpeningDate = account.OpeningDate
             };
         }
@@ -57,7 +56,14 @@ namespace Backend.Services.Implementations
 
         public AccountDTO Get(int id)
         {
-            return Convertir(Unidad.AccountDAL.Get(id));
+            
+            Account account = Unidad.AccountDAL.Get(id);
+            AccountType accountType = Unidad.AccountTypeDAL.Get(account.AccountTypeId);
+            Client client = Unidad.ClientDAL.Get(account.ClientId);
+            account.Client = client;
+            account.AccountType = accountType;
+
+            return Convertir(account);
         }
 
         public List<AccountDTO> GetAll()

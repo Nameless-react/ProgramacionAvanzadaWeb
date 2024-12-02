@@ -3,6 +3,11 @@ using Backend.Services.Interfaces;
 using DAL.Implementations;
 using DAL.Interfaces;
 using Entities.Entities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +20,57 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
+builder.Services.AddDbContext<ProyectoWebAvanzadaContext>(options => options.UseSqlServer(
+            builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
+builder.Services.AddDbContext<AuthDbContext>(options => options.UseSqlServer(
+            builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddIdentityCore<IdentityUser>()
+    .AddRoles<IdentityRole>()
+    .AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>("fide")
+    .AddEntityFrameworkStores<AuthDbContext>()
+    .AddDefaultTokenProviders();
+
+
+
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequiredLength = 5;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+});
+
+
+builder.Services.AddAuthentication(options =>
+{
+options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+
+
+
+
+
+}).AddJwtBearer(options =>
+{
+    options.SaveToken = true;
+    options.RequireHttpsMetadata = false;
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidAudience = builder.Configuration["JWT:ValidAudience"],
+        ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
+    };
+});
+
+
 #region DI
 builder.Services.AddDbContext<ProyectoWebAvanzadaContext>();
 builder.Services.AddScoped<IUnidadDeTrabajo, UnidadDeTrabajo>();
@@ -24,7 +80,9 @@ builder.Services.AddScoped<IClientDAL, ClientDALImpl>();
 builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IAccountDAL, AccountDALImpl>();
 builder.Services.AddScoped<IAccountService, AccountService>();
-
+builder.Services.AddScoped<IAccountTypeDAL, AccountTypeDALImpl>();
+builder.Services.AddScoped<IAccountTypeService, AccountTypeService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 #endregion
 
@@ -36,6 +94,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseAuthorization();
 

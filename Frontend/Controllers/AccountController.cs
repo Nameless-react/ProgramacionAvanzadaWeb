@@ -1,9 +1,13 @@
-﻿using Frontend.Helpers.Interface;
+﻿using Frontend.Helpers.Implementations;
+using Frontend.Helpers.Interface;
 using Frontend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Frontend.Controllers
 {
+
+    [Authorize]
     public class AccountController : Controller
     {
         IAccountHelper _accountHelper;
@@ -15,6 +19,7 @@ namespace Frontend.Controllers
 
         public ActionResult Index() 
         {
+            _accountHelper.Token = HttpContext.Session.GetString("token");
             var list = _accountHelper.GetAccounts();
             return View(list);
         }
