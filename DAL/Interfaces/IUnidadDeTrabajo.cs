@@ -13,7 +13,7 @@ namespace DAL.Interfaces
         IClientDAL ClientDAL { get; }
         IAccountDAL AccountDAL { get; }
 
-
+        ITransactionDAL TransactionDAL { get; }
         bool Complete();
     }
 }

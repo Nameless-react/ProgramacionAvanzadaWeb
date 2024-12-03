@@ -24,6 +24,8 @@ builder.Services.AddScoped<IClientDAL, ClientDALImpl>();
 builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IAccountDAL, AccountDALImpl>();
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<ITransactionDAL, TransactionDALImpl>();
+builder.Services.AddScoped<ITransactionService, TransactionService>();
 
 
 #endregion
