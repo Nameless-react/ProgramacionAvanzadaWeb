@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,6 +30,9 @@ public partial class ProyectoWebAvanzadaContext : DbContext
     public virtual DbSet<TransactionReport> TransactionReports { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+    //Oscar String   "Server=DESKTOP-3VGIH3K\\SQLEXPRESS;Database=ProyectoWebAvanzada;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=True;"
+
     {
         base.OnConfiguring(optionsBuilder);
     }
