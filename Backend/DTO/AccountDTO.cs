@@ -16,21 +16,15 @@ namespace Backend.DTO
 
         public DateTime? OpeningDate { get; set; }
 
-         public string FirstName { get; set; }
+         public string? FirstName { get; set; }
 
-        public string typeName { get; set; }
+        public string? typeName { get; set; }
 
-        public string email { get; set; }
+        public string? email { get; set; }
 
-        public string phone { get; set; }
-
-        public virtual ICollection<Transaction> TransactionDestinationAccounts { get; set; } = new List<Transaction>();
-
-        public virtual ICollection<Transaction> TransactionOriginAccounts { get; set; } = new List<Transaction>();
-
-        public virtual ICollection<TransactionReport> TransactionReports { get; set; } = new List<TransactionReport>();
+        public string? phone { get; set; }
     }
-    }
+}
 
 
 
