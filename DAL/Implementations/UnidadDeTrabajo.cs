@@ -17,8 +17,7 @@ public class UnidadDeTrabajo : IUnidadDeTrabajo
                            IAccountTypeDAL accountTypeDAL,
                            IClientDAL clientDAL,
                            IAccountDAL accountDAL,
-                           ITransactionDAL transactionDAL,
-                           IAccountTypeDAL accountTypeDAL) 
+                           ITransactionDAL transactionDAL) 
     {
         this._proyectoWebAvanzada = proyectoWebAvanzadaContext;
         this.EmployeeDAL = employeesDAL;
