@@ -105,11 +105,9 @@ namespace FrontEnd.Helpers.Implementations
             return result;
         }
 
-
-
         public EmployeeViewModel UpdateEmployee(EmployeeViewModel employee)
         {
-            HttpResponseMessage response = _ServiceRepository.PutResponse("api/Employee/" + employee.EmployeeID.ToString(), Convertir(employee));
+            HttpResponseMessage response = _ServiceRepository.PutResponse("api/Client/" + employee.EmployeeID.ToString(), Convertir(employee));
             if (response.IsSuccessStatusCode)
             {
                 var content = response.Content.ReadAsStringAsync().Result;

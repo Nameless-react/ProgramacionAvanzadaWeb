@@ -22,6 +22,8 @@ builder.Services.AddScoped<IClientHelper, ClientHelper>();
 builder.Services.AddScoped<IAccountHelper, AccountHelper>();
 builder.Services.AddScoped<ISecurityHelper, SecurityHelper>();
 builder.Services.AddScoped<IAccessReportHelper, AccessReportHelper>();
+builder.Services.AddScoped<ITransactionHelper, TransactionHelper>();
+
 
 var app = builder.Build();
 
