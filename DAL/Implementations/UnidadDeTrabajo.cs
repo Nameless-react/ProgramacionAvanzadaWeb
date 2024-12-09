@@ -9,6 +9,8 @@ public class UnidadDeTrabajo : IUnidadDeTrabajo
     public IAccountDAL AccountDAL { get; set; }
     public ITransactionDAL TransactionDAL { get; set; }
 
+    public IAccessReportDAL AccessReportDAL { get; set; }
+
     private ProyectoWebAvanzadaContext _proyectoWebAvanzada;
 
 
@@ -17,7 +19,9 @@ public class UnidadDeTrabajo : IUnidadDeTrabajo
                            IAccountTypeDAL accountTypeDAL,
                            IClientDAL clientDAL,
                            IAccountDAL accountDAL,
-                           ITransactionDAL transactionDAL) 
+                           IAccessReportDAL accessReportDAL,
+                           ITransactionDAL transactionDAL)
+                           
     {
         this._proyectoWebAvanzada = proyectoWebAvanzadaContext;
         this.EmployeeDAL = employeesDAL;
@@ -25,7 +29,8 @@ public class UnidadDeTrabajo : IUnidadDeTrabajo
         this.AccountDAL = accountDAL; 
         this.TransactionDAL = transactionDAL;
         this.AccountTypeDAL = accountTypeDAL;
-       
+        this.AccessReportDAL = accessReportDAL;
+
     }
 
 

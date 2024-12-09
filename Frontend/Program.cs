@@ -1,3 +1,4 @@
+using Frontend.Helpers;
 using Frontend.Helpers.Implementations;
 using Frontend.Helpers.Interface;
 using FrontEnd.Helpers.Implementations;
@@ -20,9 +21,12 @@ builder.Services.AddScoped<IEmployeeHelper, EmployeeHelper>();
 builder.Services.AddScoped<IClientHelper, ClientHelper>();
 builder.Services.AddScoped<IAccountHelper, AccountHelper>();
 builder.Services.AddScoped<ISecurityHelper, SecurityHelper>();
+builder.Services.AddScoped<IAccessReportHelper, AccessReportHelper>();
 builder.Services.AddScoped<ITransactionHelper, TransactionHelper>();
 
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
