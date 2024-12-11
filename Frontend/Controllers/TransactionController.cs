@@ -1,30 +1,27 @@
 ﻿using Frontend.Helpers.Interface;
-using FrontEnd.Helpers.Implementations;
 using Frontend.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Frontend.Controllers
 {
-    public class EmployeeController : Controller
+    public class TransactionController : Controller
     {
-        IEmployeeHelper _employeeHelper;
-        public EmployeeController(IEmployeeHelper employeeHelper)
+        ITransactionHelper _transactionHelper;
+        public TransactionController(ITransactionHelper transactionHelper)
         {
-            _employeeHelper = employeeHelper;
+            _transactionHelper = transactionHelper;
         }
 
         public ActionResult Index()
         {
-            var list = _employeeHelper.GetEmployees();
+            var list = _transactionHelper.GetTransactions();
             return View(list);
         }
 
-
         public ActionResult Details(int id)
         {
-            var employee = _employeeHelper.GetEmployee(id);
-            return View(employee);
+            var client = _transactionHelper.Get(id);
+            return View(client);
         }
 
         public ActionResult Create()
@@ -34,11 +31,11 @@ namespace Frontend.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(EmployeeViewModel employee)
+        public ActionResult Create(TransactionViewModel transaction)
         {
             try
             {
-                _employeeHelper.AddEmployee(employee);
+                _transactionHelper.Add(transaction);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -49,17 +46,17 @@ namespace Frontend.Controllers
 
         public ActionResult Edit(int id)
         {
-            var employee = _employeeHelper.GetEmployee(id);
-            return View(employee);
+            var transaction = _transactionHelper.Get(id);
+            return View(transaction);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(EmployeeViewModel employee)
+        public ActionResult Edit(TransactionViewModel transaction)
         {
             try
             {
-                _employeeHelper.UpdateEmployee(employee);
+                _transactionHelper.Update(transaction);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -70,17 +67,17 @@ namespace Frontend.Controllers
 
         public ActionResult Delete(int id)
         {
-            var employee = _employeeHelper.GetEmployee(id);
-            return View(employee);
+            var transaction = _transactionHelper.Get(id);
+            return View(transaction);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(EmployeeViewModel employee)
+        public ActionResult Delete(TransactionViewModel transaction)
         {
             try
             {
-                _employeeHelper.DeleteEmployee(employee.EmployeeID);
+                _transactionHelper.Delete(transaction.TransactionId);
                 return RedirectToAction(nameof(Index));
             }
             catch

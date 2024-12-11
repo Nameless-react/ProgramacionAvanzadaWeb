@@ -31,7 +31,8 @@ public partial class ProyectoWebAvanzadaContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
-    //Oscar String   "Server=DESKTOP-3VGIH3K\\SQLEXPRESS;Database=ProyectoWebAvanzada;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=True;"
+    //Oscar String
+    //"Server=DESKTOP-3VGIH3K\\SQLEXPRESS;Database=ProyectoWebAvanzada;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=True;"
 
     {
         base.OnConfiguring(optionsBuilder);

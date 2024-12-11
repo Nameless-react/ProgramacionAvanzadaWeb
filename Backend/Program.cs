@@ -48,9 +48,9 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 builder.Services.AddAuthentication(options =>
 {
-options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 
 
 
@@ -85,6 +85,11 @@ builder.Services.AddScoped<ITransactionService, TransactionService>();
 builder.Services.AddScoped<IAccountTypeDAL, AccountTypeDALImpl>();
 builder.Services.AddScoped<IAccountTypeService, AccountTypeService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IAccessReportDAL, AccessReportDALImpl>();
+builder.Services.AddScoped<IAccessReportService, AccessReportService>();
+builder.Services.AddScoped<ITransactionReportDAL, TransactionReportDALImpl>();
+builder.Services.AddScoped<ITransactionReportService,TransactionReportService>();
+
 
 
 #endregion
