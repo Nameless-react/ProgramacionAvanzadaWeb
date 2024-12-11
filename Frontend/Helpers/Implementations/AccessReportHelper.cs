@@ -15,7 +15,6 @@ namespace Frontend.Helpers.Implementations
     {
         private readonly IServiceRepository _serviceRepository;
 
-        public string Token { get; set; }
 
         public AccessReportHelper(IServiceRepository serviceRepository)
         {
@@ -56,21 +55,10 @@ namespace Frontend.Helpers.Implementations
         }
 
 
-        public void AddReport(AccessReportViewModel accessReportViewModel)
-        {
-            HttpResponseMessage response = _serviceRepository.PostResponse("api/AccessReport", Convert( accessReportViewModel));
-            if (response.IsSuccessStatusCode)
-            {
-                var content = response.Content.ReadAsStringAsync().Result;
-            }
-           
-        }
-
-
         public List<AccessReportViewModel> GetAllReports()
         {
 
-            _serviceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
+            _serviceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer");
             HttpResponseMessage responseMessage = _serviceRepository.GetResponse("api/AccessReport");
             List<AccessReport> accessReports = new List<AccessReport>();
             if (responseMessage != null)

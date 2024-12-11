@@ -4,11 +4,11 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="text-center mb-1">Empleados</h1>
+<h1>Empleados</h1>
 
-<p class="text-right">
-    <a asp-action="Create" class="crearnuevo">Crear nuevo empleado</a>
-</p>
+    <p>
+        <a asp-action="Create" class="btn btn-success">Nuevo Empleado</a>
+    </p>
 
 <table class="table">
     <thead>
@@ -39,9 +39,11 @@
                 <td>@Html.DisplayFor(modelItem => item.HireDate)</td>
                 <td>@Html.DisplayFor(modelItem => item.Position)</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.EmployeeID" class="edit">Editar</a>
-                    <a asp-action="Details" asp-route-id="@item.EmployeeID" class="details">Detalles</a>
-                    <a asp-action="Delete" asp-route-id="@item.EmployeeID" class="delete">Eliminar</a>
+                    <button class="btn btn-primary" onclick="location.href='@Url.Action("Edit", new { id = item.EmployeeID })'">Editar</button>
+                    <hr />
+                    <button class="btn btn-info" onclick="location.href='@Url.Action("Details", new { id = item.EmployeeID })'">Detalles</button>
+                    <hr />
+                    <button class="btn btn-danger" onclick="location.href='@Url.Action("Delete", new { id = item.EmployeeID })'">Eliminar</button>
                 </td>
             </tr>
         }
