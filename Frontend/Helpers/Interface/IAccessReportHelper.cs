@@ -9,9 +9,7 @@ namespace Frontend.Helpers.Interface
     {
         List<AccessReportViewModel> GetAllReports();
 
-        string Token { get; set; }
         AccessReportViewModel GetReport(int id);
-        void AddReport(AccessReportViewModel report);
        
     }
 }
