@@ -87,6 +87,8 @@ builder.Services.AddScoped<IAccountTypeService, AccountTypeService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IAccessReportDAL, AccessReportDALImpl>();
 builder.Services.AddScoped<IAccessReportService, AccessReportService>();
+builder.Services.AddScoped<ITransactionReportDAL, TransactionReportDALImpl>();
+builder.Services.AddScoped<ITransactionReportService,TransactionReportService>();
 
 
 
