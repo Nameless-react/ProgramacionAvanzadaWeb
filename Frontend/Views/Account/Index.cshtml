@@ -7,7 +7,7 @@
 <h1>Cuentas</h1>
 
 <p>
-    <a asp-action="Create">Crear nueva cuenta</a>
+    <a asp-action="Create" class="btn btn-success">Crear nueva cuenta</a>
 </p>
 <table class="table">
     <thead>
@@ -56,9 +56,9 @@
                     @Html.DisplayFor(modelItem => item.OpeningDate)
                 </td>
                 <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.AccountId }) |
-                    @Html.ActionLink("Detalles", "Details", new { id = item.AccountId }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.AccountId })
+                    <button class="btn btn-primary" onclick="location.href='@Url.Action("Edit", new { id = item.AccountId })'">Editar</button> 
+                    <button class="btn btn-info" onclick="location.href='@Url.Action("Details", new { id = item.AccountId })'">Detalles</button> 
+                    <button class="btn btn-danger" onclick="location.href='@Url.Action("Delete", new { id = item.AccountId })'">Eliminar</button>
                 </td>
             </tr>
         }
