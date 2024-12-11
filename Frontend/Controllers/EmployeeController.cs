@@ -3,9 +3,11 @@ using FrontEnd.Helpers.Implementations;
 using Frontend.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Frontend.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
     {
         IEmployeeHelper _employeeHelper;

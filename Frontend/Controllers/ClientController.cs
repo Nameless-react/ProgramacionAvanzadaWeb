@@ -1,10 +1,13 @@
 ﻿using Frontend.Helpers.Interface;
 using Frontend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Frontend.Controllers
 {
+
+    [Authorize]
     public class ClientController : Controller
     {
         IClientHelper _clientHelper;

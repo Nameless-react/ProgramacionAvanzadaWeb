@@ -1,13 +1,16 @@
 ﻿using Frontend.ApiModel;
 using Frontend.Helpers.Interface;
 using Frontend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Frontend.Controllers
 {
+    [Authorize]
     public class AccessReportController : Controller
     {
+        
         // Declaración única del campo _accessReportHelper
         private readonly IAccessReportHelper _accessReportHelper;
 

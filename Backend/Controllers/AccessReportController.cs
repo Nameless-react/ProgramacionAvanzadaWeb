@@ -1,12 +1,14 @@
 ﻿using Backend.DTO;
 using Backend.Services.Implementations;
 using Backend.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AccessReportController : ControllerBase
     {
         private readonly IAccessReportService _service;

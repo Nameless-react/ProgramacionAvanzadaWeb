@@ -1,11 +1,21 @@
 ﻿using Frontend.ApiModel;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Frontend.Models;
 using Frontend.Helpers.Interface;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Server.HttpSys;
+using System;
+using System.Globalization;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using System.Web;
+using Microsoft.AspNetCore.Authentication;
+
 
 namespace Frontend.Controllers
 {
@@ -14,10 +24,19 @@ namespace Frontend.Controllers
         ISecurityHelper securityHelper;
         public LoginController(ISecurityHelper securityHelper)
         {
-
             this.securityHelper = securityHelper;
         }
 
+
+        
+        public IActionResult Logout()
+        {
+            
+            HttpContext.Response.Cookies.Delete(".AspNetCore.Cookies");
+            HttpContext.Response.Cookies.Delete(".AspNetCore.Session");
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
 
         public IActionResult Login(string ReturnedUrl = "/")
         {

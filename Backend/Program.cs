@@ -19,6 +19,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<AuthDbContext>()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddDbContext<ProyectoWebAvanzadaContext>(options => options.UseSqlServer(
             builder.Configuration.GetConnectionString("DefaultConnection")));

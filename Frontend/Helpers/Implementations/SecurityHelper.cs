@@ -15,6 +15,19 @@ namespace Frontend.Helpers.Implementations
 
         }
 
+        public void Logout()
+        {
+            try
+            {
+                HttpResponseMessage response = ServiceRepository.PostResponse("/api/Auth/Logout", new {});
+                var content = response.Content.ReadAsStringAsync().Result;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
 
         public LoginAPI Login(UserViewModel user)
         {

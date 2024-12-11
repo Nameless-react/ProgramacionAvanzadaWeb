@@ -11,38 +11,55 @@ namespace Backend.Controllers
     public class AuthController : ControllerBase
     {
         private readonly UserManager<IdentityUser> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private ITokenService TokenService;
 
-        public AuthController(UserManager<IdentityUser> userManager, ITokenService tokenService)
+        public AuthController(UserManager<IdentityUser> userManager, ITokenService tokenService, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.TokenService = tokenService;
+              this.roleManager = roleManager;
         }
+
+       
 
 
         [HttpPost]
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO model)
         {
-
             var userExists = await userManager.FindByNameAsync(model.Username);
             if (userExists != null)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
-
             IdentityUser user = new IdentityUser
             {
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = model.Username
-
             };
-
 
             var result = await userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+            var roleExist = await roleManager.RoleExistsAsync("Consulta");
+            if (!roleExist)
+            {
+                // Si el rol no existe, lo creamos
+                var roleResult = await roleManager.CreateAsync(new IdentityRole("Consulta"));
+                if (!roleResult.Succeeded)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError);
+                }
+            }
+
+            var addRoleResult = await userManager.AddToRoleAsync(user, "Consulta");
+            if (!addRoleResult.Succeeded)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
