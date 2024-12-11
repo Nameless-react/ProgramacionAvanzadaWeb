@@ -19,6 +19,7 @@ builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IEmployeeHelper, EmployeeHelper>();
 builder.Services.AddScoped<IClientHelper, ClientHelper>();
 builder.Services.AddScoped<IAccountHelper, AccountHelper>();
+builder.Services.AddScoped<IRegisterHelper, RegisterHelper>();
 builder.Services.AddScoped<ISecurityHelper, SecurityHelper>();
 
 var app = builder.Build();

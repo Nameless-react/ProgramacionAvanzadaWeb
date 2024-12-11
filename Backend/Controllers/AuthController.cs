@@ -47,7 +47,7 @@ namespace Backend.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
-            return Ok();
+            return Ok(result);
         }
 
         [HttpPost]
@@ -69,8 +69,8 @@ namespace Backend.Controllers
                 return Ok(Usuario);
             }
 
+
             return Unauthorized();
         }
-
     }
 }
