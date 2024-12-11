@@ -14,6 +14,7 @@ namespace DAL.Interfaces
         IAccountDAL AccountDAL { get; }
         ITransactionDAL TransactionDAL { get; }
         IAccessReportDAL AccessReportDAL { get;}
+        ITransactionReportDAL TransactionReportDAL { get; } 
         bool Complete();
     }
 }
