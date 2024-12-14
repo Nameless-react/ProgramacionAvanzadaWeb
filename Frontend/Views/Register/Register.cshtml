@@ -12,16 +12,7 @@
     <link rel="stylesheet" href="~/css/RegisterStyles.css" />
 </head>
 <body>
-
-    <header>
-        <nav class="navbar">
-            <div class="container">
-                <a class="navbar-brand" href="#">Banco Altum</a>
-            </div>
-        </nav>
-    </header>
-
-    <div class="container form-container">
+    <div class="container form-container" style="flex-direction: column; max-width: 40%; margin: 0 auto;">
         <h4>Register</h4>
         <hr />
         <form asp-action="Register">
@@ -53,10 +44,5 @@
             await Html.RenderPartialAsync("_ValidationScriptsPartial");
         }
     }
-    <footer>
-        <div class="container">
-            &copy; 2024 - Banco Altum
-        </div>
-    </footer>
 </body>
 </html>
