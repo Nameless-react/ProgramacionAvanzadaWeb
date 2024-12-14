@@ -7,25 +7,12 @@ body {
 }
 
 
-.navbar {
-    background-color: #2e86c1;
-    color: white;
-    padding: 10px;
-    text-align: center;
-}
-
-    .navbar .navbar-brand {
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-    }
-
-
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    flex-direction: column;
 }
 
 .form-container {
@@ -33,9 +20,8 @@ body {
     padding: 20px;
     margin: 20px;
     border-radius: 8px;
-    width: 100%;
-    max-width: 400px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
 }
 
 h4 {
