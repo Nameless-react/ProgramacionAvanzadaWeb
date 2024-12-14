@@ -4,10 +4,10 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Detalles</h1>
+<h1 class="text-center fw-bold">Detalles de Clientes</h1>
 
-<div>
-    <hr />
+<div class="p-4 mt-4" style="background-color: white; border-radius: 10px; max-width: 800px; margin: 0 auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+    <dl class="row">
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ClientId)
@@ -65,7 +65,7 @@
         </dd>
     </dl>
 </div>
-<div>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.ClientId } )
-    <a asp-action="Index">Volver a la lista de Clientes</a>
+<div class="text-center mt-4">
+    <a href="@Url.Action("Edit", new { id = Model.ClientId })" class="btn btn-success">Editar</a>
+    <a href="@Url.Action("Index", "AccessReport")" class="btn btn-info">Volver a la lista de Reportes</a>
 </div>
