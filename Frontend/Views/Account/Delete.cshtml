@@ -4,53 +4,56 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Eliminar Cuenta</h1>
+<h1 class="text-center fw-bold display-4">Eliminar Cuenta</h1>
 
-<h3>Esta seguro que desea eliminar esta cuenta?</h3>
-<div>
+<h3 class="text-center mt-4" style="font-size: 1.5rem;">¿Está seguro que desea eliminar esta cuenta?</h3>
+
+<div class="p-4 mt-4" style="background-color: white; border-radius: 10px; max-width: 600px; margin: 0 auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
     <dl class="row">
-        <dt class="col-sm-2">
+        <dt class="col-sm-4">
             @Html.DisplayNameFor(model => model.AccountId)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-8">
             @Html.DisplayFor(model => model.AccountId)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-4">
             @Html.DisplayNameFor(model => model.AccountNumber)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-8">
             @Html.DisplayFor(model => model.AccountNumber)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-4">
             @Html.DisplayNameFor(model => model.ClientId)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-8">
             @Html.DisplayFor(model => model.ClientId)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-4">
             @Html.DisplayNameFor(model => model.AccountTypeId)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-8">
             @Html.DisplayFor(model => model.AccountTypeId)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-4">
             @Html.DisplayNameFor(model => model.Balance)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-8">
             @Html.DisplayFor(model => model.Balance)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-4">
             @Html.DisplayNameFor(model => model.OpeningDate)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-8">
             @Html.DisplayFor(model => model.OpeningDate)
         </dd>
     </dl>
 
-    <form asp-action="Delete">
+    <form asp-action="Delete" class="mt-3">
         @Html.HiddenFor(Model => Model.AccountId)
-        <input type="submit" value="Delete" class="btn btn-danger" />
-        <a asp-action="Index">Volver a la lista de Cuentas</a>
+        <input type="submit" value="Eliminar" class="btn btn-danger w-100" />
     </form>
 
+    <div class="text-center mt-3">
+        <a asp-action="Index" class="btn btn-info">Volver a la lista de Cuentas</a>
+    </div>
 </div>
