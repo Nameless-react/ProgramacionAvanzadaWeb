@@ -31,26 +31,13 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
                             </li>
-                            @if (isAdmin)
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Index">Empleados</a>
-                                </li>
-                            }
-                            @if (isAdmin)
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Client" asp-action="Index">Clientes</a>
-                                </li>
-                            }
+                        @if (User.Identity.IsAuthenticated)
+                        {
                             @if (isConsulta || isAdmin)
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Index">Cuentas</a>
                                 </li>
-                            }
-                            @if (isConsulta || isAdmin)
-                            {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Transaction" asp-action="Index">Transacciones</a>
                                 </li>
@@ -58,19 +45,31 @@
                             @if (isAdmin)
                             {
                                 <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Index">Empleados</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Client" asp-action="Index">Clientes</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="AccessReport" asp-action="Index">Accesos</a>
                                 </li>
-                            }
-                            @if (isAdmin)
-                            {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="TransactionReport" asp-action="Index">Transacciones Reportes</a>
                                 </li>
                             }
-                        @if (isConsulta || isAdmin)
+                            @if (isConsulta || isAdmin)
+                            {
+                                <li class="nav-item" style="margin-left: auto">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Logout</a>
+                                </li>
+                            }
+                        } else
                         {
                             <li class="nav-item" style="margin-left: auto">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Logout</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Login">Iniciar Sesión</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="Register">Crear Cuenta</a>
                             </li>
                         }
 
