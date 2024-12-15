@@ -9,6 +9,7 @@ namespace Frontend.Controllers
     public class TransactionController : Controller
     {
         ITransactionHelper _transactionHelper;
+        IAccountHelper _accountHelper;
         public TransactionController(ITransactionHelper transactionHelper)
         {
             _transactionHelper = transactionHelper;
@@ -16,18 +17,21 @@ namespace Frontend.Controllers
 
         public ActionResult Index()
         {
+            _transactionHelper.Token = HttpContext.Session.GetString("token");
             var list = _transactionHelper.GetTransactions();
             return View(list);
         }
 
         public ActionResult Details(int id)
         {
+            _transactionHelper.Token = HttpContext.Session.GetString("token");
             var client = _transactionHelper.Get(id);
             return View(client);
         }
 
         public ActionResult Create()
         {
+            _transactionHelper.Token = HttpContext.Session.GetString("token");
             return View();
         }
 
@@ -37,6 +41,7 @@ namespace Frontend.Controllers
         {
             try
             {
+                _transactionHelper.Token = HttpContext.Session.GetString("token");
                 _transactionHelper.Add(transaction);
                 return RedirectToAction(nameof(Index));
             }
@@ -48,6 +53,7 @@ namespace Frontend.Controllers
 
         public ActionResult Edit(int id)
         {
+            _transactionHelper.Token = HttpContext.Session.GetString("token");
             var transaction = _transactionHelper.Get(id);
             return View(transaction);
         }
@@ -58,6 +64,7 @@ namespace Frontend.Controllers
         {
             try
             {
+                _transactionHelper.Token = HttpContext.Session.GetString("token");
                 _transactionHelper.Update(transaction);
                 return RedirectToAction(nameof(Index));
             }
@@ -69,6 +76,7 @@ namespace Frontend.Controllers
 
         public ActionResult Delete(int id)
         {
+            _transactionHelper.Token = HttpContext.Session.GetString("token");
             var transaction = _transactionHelper.Get(id);
             return View(transaction);
         }
@@ -79,6 +87,7 @@ namespace Frontend.Controllers
         {
             try
             {
+                _transactionHelper.Token = HttpContext.Session.GetString("token");
                 _transactionHelper.Delete(transaction.TransactionId);
                 return RedirectToAction(nameof(Index));
             }

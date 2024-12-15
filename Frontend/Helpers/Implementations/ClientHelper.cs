@@ -1,6 +1,7 @@
 ﻿using Frontend.ApiModel;
 using Frontend.Helpers.Interface;
 using Frontend.Models;
+using FrontEnd.Helpers.Implementations;
 using FrontEnd.Helpers.Interfaces;
 using Newtonsoft.Json;
 
@@ -8,6 +9,8 @@ namespace Frontend.Helpers.Implementations
 {
     public class ClientHelper : IClientHelper
     {
+        public string Token { get; set; }
+
         IServiceRepository _ServiceRepository;
         public ClientHelper(IServiceRepository serviceRepository)
         {
@@ -18,15 +21,9 @@ namespace Frontend.Helpers.Implementations
             return new Client
             {
                 ClientId = client.ClientId,
-                FirstName = client.FirstName,
-                LastName = client.LastName, 
-                DateOfBirth = client.DateOfBirth,
-                Phone = client.Phone,
-                Email = client.Email,
-                Address = client.Address,
-                City = client.City,     
-                Country = client.Country,
-                RegistrationDate = client.RegistrationDate,
+                UserName = client.UserName,
+                PhoneNumber = client.PhoneNumber, 
+                Email = client.Email
 
 
             };
@@ -53,6 +50,7 @@ namespace Frontend.Helpers.Implementations
 
         public ClientViewModel Get(int id)
         {
+            _ServiceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
             HttpResponseMessage responseMessage = _ServiceRepository.GetResponse("api/Client/" + id.ToString());
             Client client = new Client();
             if(responseMessage != null)
@@ -63,21 +61,16 @@ namespace Frontend.Helpers.Implementations
             ClientViewModel resultado = new ClientViewModel
             {
                 ClientId = client.ClientId,
-                FirstName = client.FirstName,
-                LastName = client.LastName,
-                DateOfBirth = client.DateOfBirth,
-                Phone = client.Phone,
-                Email = client.Email,
-                Address = client.Address,
-                City = client.City,
-                Country = client.Country,
-                RegistrationDate = client.RegistrationDate
+                UserName = client.UserName,
+                PhoneNumber = client.PhoneNumber,
+                Email = client.Email
             };
             return resultado;
         }
 
         public List<ClientViewModel> GetClients()
         {
+            _ServiceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
             HttpResponseMessage responseMessage = _ServiceRepository.GetResponse("api/Client");
             List<Client> clients = new List<Client>();
             if(responseMessage != null)
@@ -92,15 +85,9 @@ namespace Frontend.Helpers.Implementations
                     new ClientViewModel
                     {
                         ClientId = item.ClientId,
-                        FirstName = item.FirstName,
-                        LastName = item.LastName,
-                        DateOfBirth = item.DateOfBirth,
-                        Phone = item.Phone,
-                        Email = item.Email,
-                        Address = item.Address,
-                        City = item.City,
-                        Country = item.Country,
-                        RegistrationDate = item.RegistrationDate
+                        UserName = item.UserName,
+                        PhoneNumber = item.PhoneNumber,
+                        Email = item.Email
                     }
                     );
             }return result;

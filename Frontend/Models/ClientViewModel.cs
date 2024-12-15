@@ -7,31 +7,14 @@ namespace Frontend.Models
         [DisplayName("ID")]
         public int ClientId { get; set; }
 
-        [DisplayName("Nombre")]
-        public string FirstName { get; set; } = null!;
+        [DisplayName("Nombre de Usuario")]
+        public string UserName { get; set; } = null!;
 
-        [DisplayName("Apellido")]
-        public string LastName { get; set; } = null!;
+        [DisplayName("Numero de telefono")]
+        public string PhoneNumber { get; set; }
 
-        [DisplayName("Fecha de Nacimiento")]
-        public DateOnly? DateOfBirth { get; set; }
+        [DisplayName("Email")]
+        public string Email { get; set; } = null!;
 
-        [DisplayName("Telefono")]
-        public string? Phone { get; set; }
-
-        [DisplayName("Correo Electronico")]
-        public string? Email { get; set; }
-
-        [DisplayName("Direccion")]
-        public string? Address { get; set; }
-
-        [DisplayName("Ciudad")]
-        public string? City { get; set; }
-
-        [DisplayName("Pais")]
-        public string? Country { get; set; }
-
-        [DisplayName("Fecha de Registro")]
-        public DateTime? RegistrationDate { get; set; }
     }
 }

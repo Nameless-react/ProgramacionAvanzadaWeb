@@ -11,6 +11,8 @@ namespace Frontend.Controllers
     public class AccessReportController : Controller
     {
 
+        IAccountHelper _accountHelper;
+
         private readonly IAccessReportHelper _accessReportHelper;
 
 
@@ -21,6 +23,7 @@ namespace Frontend.Controllers
 
         public ActionResult Index()
         {
+            _accessReportHelper.Token = HttpContext.Session.GetString("token");
             var reports = _accessReportHelper.GetAllReports();
             return View(reports);
         }

@@ -16,13 +16,7 @@ namespace Backend.DTO
 
         public DateTime? OpeningDate { get; set; }
 
-         public string? FirstName { get; set; }
-
         public string? typeName { get; set; }
-
-        public string? email { get; set; }
-
-        public string? phone { get; set; }
     }
 }
 

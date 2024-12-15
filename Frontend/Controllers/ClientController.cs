@@ -11,37 +11,42 @@ namespace Frontend.Controllers
     public class ClientController : Controller
     {
         IClientHelper _clientHelper;
+        IAccountHelper _accountHelper;
         public ClientController(IClientHelper clientHelper)
         {
             _clientHelper = clientHelper;
         }
-        // GET: ClientController
+
         public ActionResult Index()
         {
+            _clientHelper.Token = HttpContext.Session.GetString("token");
             var list = _clientHelper.GetClients();
             return View(list);
         }
 
-        // GET: ClientController/Details/5
+
         public ActionResult Details(int id)
-        {   
+        {
+            _clientHelper.Token = HttpContext.Session.GetString("token");
             var client = _clientHelper.Get(id);
             return View(client);
         }
 
-        // GET: ClientController/Create
+
         public ActionResult Create()
         {
+            _clientHelper.Token = HttpContext.Session.GetString("token");
             return View();
         }
 
-        // POST: ClientController/Create
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(ClientViewModel client)
         {
             try
             {
+                _clientHelper.Token = HttpContext.Session.GetString("token");
                 _clientHelper.Add(client);
                 return RedirectToAction(nameof(Index));
             }
@@ -51,20 +56,22 @@ namespace Frontend.Controllers
             }
         }
 
-        // GET: ClientController/Edit/5
+
         public ActionResult Edit(int id)
         {
+            _clientHelper.Token = HttpContext.Session.GetString("token");
             var client = _clientHelper.Get(id);
             return View(client);
         }
 
-        // POST: ClientController/Edit/5
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ClientViewModel client)
         {
             try
             {
+                _clientHelper.Token = HttpContext.Session.GetString("token");
                 _clientHelper.Update(client);
                 return RedirectToAction(nameof(Index));
             }
@@ -74,20 +81,22 @@ namespace Frontend.Controllers
             }
         }
 
-        // GET: ClientController/Delete/5
+
         public ActionResult Delete(int id)
         {
+            _clientHelper.Token = HttpContext.Session.GetString("token");
             var client = _clientHelper.Get(id);
             return View(client);
         }
 
-        // POST: ClientController/Delete/5
+  
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(ClientViewModel client)
         {
             try
             {
+                _clientHelper.Token = HttpContext.Session.GetString("token");
                 _clientHelper.Delete(client.ClientId);
                 return RedirectToAction(nameof(Index));
             }

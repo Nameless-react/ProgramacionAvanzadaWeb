@@ -3,12 +3,14 @@ using FrontEnd.Helpers.Interfaces;
 using Frontend.Models;
 using Newtonsoft.Json;
 using Frontend.ApiModel;
+using FrontEnd.Helpers.Implementations;
 
 namespace Frontend.Helpers.Implementations
 {
     public class TransactionHelper : ITransactionHelper
     {
         IServiceRepository _ServiceRepository;
+        public string Token { get; set; }
         public TransactionHelper(IServiceRepository serviceRepository)
         {
             _ServiceRepository = serviceRepository;
@@ -47,6 +49,7 @@ namespace Frontend.Helpers.Implementations
 
         public TransactionViewModel Get(int id)
         {
+            _ServiceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
             HttpResponseMessage responseMessage = _ServiceRepository.GetResponse("api/Transaction/" + id.ToString());
             Transaction transaction = new Transaction();
             if (responseMessage != null)
@@ -68,6 +71,7 @@ namespace Frontend.Helpers.Implementations
 
         public List<TransactionViewModel> GetTransactions()
         {
+            _ServiceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
             HttpResponseMessage responseMessage = _ServiceRepository.GetResponse("api/Transaction");
             List<Transaction> transactions = new List<Transaction>();
             if (responseMessage != null)

@@ -10,6 +10,7 @@ namespace FrontEnd.Helpers.Implementations
     public class EmployeeHelper : IEmployeeHelper
     {
         IServiceRepository _ServiceRepository;
+        public string Token { get; set; }
         public EmployeeHelper(IServiceRepository serviceRepository)
         {
             _ServiceRepository = serviceRepository;
@@ -53,6 +54,7 @@ namespace FrontEnd.Helpers.Implementations
 
         public EmployeeViewModel GetEmployee(int id)
         {
+            _ServiceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
             HttpResponseMessage responseMessage = _ServiceRepository.GetResponse("api/Employee/" + id.ToString());
             Employee employee = new Employee();
             if (responseMessage != null)
@@ -77,6 +79,7 @@ namespace FrontEnd.Helpers.Implementations
 
         public List<EmployeeViewModel> GetEmployees()
         {
+            _ServiceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
             HttpResponseMessage responseMessage = _ServiceRepository.GetResponse("api/Employee");
             List<Employee> employees = new List<Employee>();
             if (responseMessage != null)

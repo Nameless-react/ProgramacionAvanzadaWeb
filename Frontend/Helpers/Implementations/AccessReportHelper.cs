@@ -14,6 +14,7 @@ namespace Frontend.Helpers.Implementations
     public class AccessReportHelper : IAccessReportHelper
     {
         private readonly IServiceRepository _serviceRepository;
+        public string Token { get; set; }
 
 
         public AccessReportHelper(IServiceRepository serviceRepository)
@@ -78,6 +79,7 @@ namespace Frontend.Helpers.Implementations
 
         public AccessReportViewModel GetReport(int id)
         {
+            _serviceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
             HttpResponseMessage responseMessage = _serviceRepository.GetResponse("api/AcessReport/" + id.ToString());
             AccessReport accessReport = new AccessReport();
             if (responseMessage != null)

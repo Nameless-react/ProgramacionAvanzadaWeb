@@ -26,12 +26,14 @@ namespace Frontend.Controllers
 
         public ActionResult Details(int id) 
         {
+            _accountHelper.Token = HttpContext.Session.GetString("token");
             var account = _accountHelper.GetAccount(id);
             return View(account);
         }
 
         public ActionResult Create() 
         {
+            _accountHelper.Token = HttpContext.Session.GetString("token");
             return View();
         }
 
@@ -41,6 +43,7 @@ namespace Frontend.Controllers
         {
             try
             {
+                _accountHelper.Token = HttpContext.Session.GetString("token");
                 _accountHelper.Add(account);
                 return RedirectToAction(nameof(Index));
             }
@@ -52,6 +55,7 @@ namespace Frontend.Controllers
 
         public ActionResult Edit(int id) 
         {
+            _accountHelper.Token = HttpContext.Session.GetString("token");
             var account = _accountHelper.GetAccount(id);
             return View(account);
         }
@@ -62,6 +66,7 @@ namespace Frontend.Controllers
         {
             try
             {
+                _accountHelper.Token = HttpContext.Session.GetString("token");
                 _accountHelper.Update(account);
                 return RedirectToAction(nameof(Index));
             }
@@ -73,7 +78,7 @@ namespace Frontend.Controllers
 
         public ActionResult Delete(int id)
         {
-
+            _accountHelper.Token = HttpContext.Session.GetString("token");
             var account = _accountHelper.GetAccount(id);
 
             return View(account);
@@ -85,6 +90,7 @@ namespace Frontend.Controllers
         {
             try
             {
+                _accountHelper.Token = HttpContext.Session.GetString("token");
                 _accountHelper.Delete(account.AccountId);
                 return RedirectToAction(nameof(Index));
             }
