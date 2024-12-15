@@ -3,12 +3,14 @@ using FrontEnd.Helpers.Interfaces;
 using Frontend.Models;
 using Newtonsoft.Json;
 using Frontend.ApiModel;
+using FrontEnd.Helpers.Implementations;
 
 namespace Frontend.Helpers.Implementations
 {
     public class TransactionReportHelper : ITransactionReportHelper
     {
         IServiceRepository _ServiceRepository;
+        public string Token { get; set; }
         public TransactionReportHelper(IServiceRepository serviceRepository)
         {
             _ServiceRepository = serviceRepository;
@@ -31,6 +33,7 @@ namespace Frontend.Helpers.Implementations
         }
         public TransactionReportViewModel Get(int id)
         {
+            _ServiceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
             HttpResponseMessage responseMessage = _ServiceRepository.GetResponse("api/TransactionReport/" + id.ToString());
             TransactionReport transactionReport = new TransactionReport();
             if (responseMessage != null)
@@ -53,6 +56,7 @@ namespace Frontend.Helpers.Implementations
 
         public List<TransactionReportViewModel> GetTransactions()
         {
+            _ServiceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
             HttpResponseMessage responseMessage = _ServiceRepository.GetResponse("api/TransactionReport");
             List<TransactionReport> transactionReports = new List<TransactionReport>();
             if (responseMessage != null)

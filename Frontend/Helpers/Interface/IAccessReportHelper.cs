@@ -8,7 +8,7 @@ namespace Frontend.Helpers.Interface
     public interface IAccessReportHelper
     {
         List<AccessReportViewModel> GetAllReports();
-
+        string Token { get; set; }
         AccessReportViewModel GetReport(int id);
        
     }

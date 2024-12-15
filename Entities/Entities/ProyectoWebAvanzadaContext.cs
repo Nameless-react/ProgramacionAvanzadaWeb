@@ -101,16 +101,10 @@ public partial class ProyectoWebAvanzadaContext : DbContext
             entity.HasKey(e => e.ClientId).HasName("PK__Clients__E67E1A04EC5CD097");
 
             entity.Property(e => e.ClientId).HasColumnName("ClientID");
-            entity.Property(e => e.Address).HasMaxLength(200);
-            entity.Property(e => e.City).HasMaxLength(100);
-            entity.Property(e => e.Country).HasMaxLength(100);
+            entity.Property(e => e.UserName).HasMaxLength(200);
+            entity.Property(e => e.PhoneNumber).HasMaxLength(100);
             entity.Property(e => e.Email).HasMaxLength(100);
-            entity.Property(e => e.FirstName).HasMaxLength(50);
-            entity.Property(e => e.LastName).HasMaxLength(50);
-            entity.Property(e => e.Phone).HasMaxLength(20);
-            entity.Property(e => e.RegistrationDate)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
+
         });
 
         modelBuilder.Entity<Employee>(entity =>

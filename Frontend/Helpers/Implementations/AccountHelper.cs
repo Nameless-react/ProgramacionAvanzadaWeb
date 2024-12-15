@@ -1,6 +1,7 @@
 ﻿using Frontend.ApiModel;
 using Frontend.Helpers.Interface;
 using Frontend.Models;
+using FrontEnd.Helpers.Implementations;
 using FrontEnd.Helpers.Interfaces;
 using Newtonsoft.Json;
 
@@ -82,6 +83,7 @@ namespace Frontend.Helpers.Implementations
 
         public AccountViewModel GetAccount(int? id) 
         {
+            _serviceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
             HttpResponseMessage responseMessage = _serviceRepository.GetResponse("api/Accounts/" + id.ToString());
             Account account = new Account();
             if (responseMessage != null) 

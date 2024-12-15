@@ -11,6 +11,7 @@ namespace Frontend.Controllers
     public class EmployeeController : Controller
     {
         IEmployeeHelper _employeeHelper;
+        IAccountHelper _accountHelper;
         public EmployeeController(IEmployeeHelper employeeHelper)
         {
             _employeeHelper = employeeHelper;
@@ -18,6 +19,7 @@ namespace Frontend.Controllers
 
         public ActionResult Index()
         {
+            _employeeHelper.Token = HttpContext.Session.GetString("token");
             var list = _employeeHelper.GetEmployees();
             return View(list);
         }
@@ -25,12 +27,14 @@ namespace Frontend.Controllers
 
         public ActionResult Details(int id)
         {
+            _employeeHelper.Token = HttpContext.Session.GetString("token");
             var employee = _employeeHelper.GetEmployee(id);
             return View(employee);
         }
 
         public ActionResult Create()
         {
+            _employeeHelper.Token = HttpContext.Session.GetString("token");
             return View();
         }
 
@@ -40,6 +44,7 @@ namespace Frontend.Controllers
         {
             try
             {
+                _employeeHelper.Token = HttpContext.Session.GetString("token");
                 _employeeHelper.AddEmployee(employee);
                 return RedirectToAction(nameof(Index));
             }
@@ -51,6 +56,7 @@ namespace Frontend.Controllers
 
         public ActionResult Edit(int id)
         {
+            _employeeHelper.Token = HttpContext.Session.GetString("token");
             var employee = _employeeHelper.GetEmployee(id);
             return View(employee);
         }
@@ -61,6 +67,7 @@ namespace Frontend.Controllers
         {
             try
             {
+                _employeeHelper.Token = HttpContext.Session.GetString("token");
                 _employeeHelper.UpdateEmployee(employee);
                 return RedirectToAction(nameof(Index));
             }
@@ -72,6 +79,7 @@ namespace Frontend.Controllers
 
         public ActionResult Delete(int id)
         {
+            _employeeHelper.Token = HttpContext.Session.GetString("token");
             var employee = _employeeHelper.GetEmployee(id);
             return View(employee);
         }
@@ -82,6 +90,7 @@ namespace Frontend.Controllers
         {
             try
             {
+                _employeeHelper.Token = HttpContext.Session.GetString("token");
                 _employeeHelper.DeleteEmployee(employee.EmployeeID);
                 return RedirectToAction(nameof(Index));
             }

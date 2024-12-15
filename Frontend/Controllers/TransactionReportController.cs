@@ -9,6 +9,7 @@ namespace Frontend.Controllers
     public class TransactionReportController : Controller
     {
         ITransactionReportHelper _transactionReportHelper;
+        IAccountHelper _accountHelper;
         public TransactionReportController(ITransactionReportHelper transactionReportHelper)
         {
             _transactionReportHelper = transactionReportHelper;
@@ -16,6 +17,7 @@ namespace Frontend.Controllers
 
         public ActionResult Index()
         {
+            _transactionReportHelper.Token = HttpContext.Session.GetString("token");
             var list = _transactionReportHelper.GetTransactions();
             return View(list);
         }

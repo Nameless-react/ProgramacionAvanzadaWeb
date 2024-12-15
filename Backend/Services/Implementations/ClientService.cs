@@ -19,16 +19,10 @@ namespace Backend.Services.Implementations
             return new Client()
             {
                 ClientId = client.ClientId,
-                FirstName = client.FirstName,
-                LastName = client.LastName,
-                DateOfBirth = client.DateOfBirth,
-                Phone = client.Phone,
-                Email = client.Email,
-                Address = client.Address,
-                City = client.City,
-                Country = client.Country,
-                RegistrationDate = client.RegistrationDate
-            };
+                UserName = client.UserName,
+                PhoneNumber = client.PhoneNumber,
+                Email = client.Email
+            };  
         }
 
         ClientDTO Convertir(Client client)
@@ -36,15 +30,9 @@ namespace Backend.Services.Implementations
             return new ClientDTO
             {
                 ClientId = client.ClientId,
-                FirstName = client.FirstName,
-                LastName = client.LastName,
-                DateOfBirth = client.DateOfBirth,
-                Phone = client.Phone,
-                Email = client.Email,
-                Address = client.Address,
-                City = client.City,
-                Country = client.Country,
-                RegistrationDate = client.RegistrationDate
+                UserName = client.UserName,
+                PhoneNumber= client.PhoneNumber,
+                Email = client.Email
             };
         }
 
