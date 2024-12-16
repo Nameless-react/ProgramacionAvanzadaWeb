@@ -58,8 +58,7 @@ namespace Frontend.Helpers.Implementations
 
         public List<AccessReportViewModel> GetAllReports()
         {
-
-            _serviceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer");
+            _serviceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
             HttpResponseMessage responseMessage = _serviceRepository.GetResponse("api/AccessReport");
             List<AccessReport> accessReports = new List<AccessReport>();
             if (responseMessage != null)
@@ -92,6 +91,17 @@ namespace Frontend.Helpers.Implementations
             return result;
         }
 
+        public AccessReportViewModel Add(AccessReportViewModel access)
+        {
+            _serviceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
+
+            HttpResponseMessage response = _serviceRepository.PostResponse("api/AccessReport", Convert(access));
+            if (response.IsSuccessStatusCode)
+            {
+                var content = response.Content.ReadAsStringAsync().Result;
+            }
+            return access;
+        }
 
     }
 }
