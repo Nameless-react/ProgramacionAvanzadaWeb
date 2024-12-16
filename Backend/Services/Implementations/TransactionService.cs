@@ -13,7 +13,7 @@ namespace Backend.Services.Implementations
         {
             this.Unidad = unidadDeTrabajo;
         }
-        #region Convert
+        #region 
         Transaction Convert(TransactionDTO transaction)
         {
             return new Transaction()
