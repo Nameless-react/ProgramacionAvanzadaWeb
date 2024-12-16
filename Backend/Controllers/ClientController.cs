@@ -52,11 +52,9 @@ namespace Backend.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            ClientDTO client = new ClientDTO
-            {
-                ClientId = id
-            };
-            _clientService.Remove(client);
+            System.Console.WriteLine(id);
+            
+            _clientService.Remove(id);
         }
     }
 }

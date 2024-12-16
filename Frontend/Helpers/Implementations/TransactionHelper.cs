@@ -30,6 +30,8 @@ namespace Frontend.Helpers.Implementations
 
         public TransactionViewModel Add(TransactionViewModel transaction)
         {
+            _ServiceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
+
             HttpResponseMessage response = _ServiceRepository.PostResponse("api/Transaction", Convertir(transaction));
             if (response.IsSuccessStatusCode)
             {
@@ -40,6 +42,8 @@ namespace Frontend.Helpers.Implementations
 
         public void Delete(int id)
         {
+            _ServiceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
+
             HttpResponseMessage responseMessage = _ServiceRepository.DeleteResponse("api/Transaction/" + id.ToString());
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -101,6 +105,8 @@ namespace Frontend.Helpers.Implementations
 
         public TransactionViewModel Update(TransactionViewModel transaction)
         {
+            _ServiceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
+
             HttpResponseMessage response = _ServiceRepository.PutResponse("api/Transaction/" + transaction.TransactionId.ToString(), Convertir(transaction));
             if (response.IsSuccessStatusCode)
             {

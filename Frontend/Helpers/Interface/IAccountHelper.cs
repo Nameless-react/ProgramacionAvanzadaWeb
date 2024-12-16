@@ -6,7 +6,7 @@ namespace Frontend.Helpers.Interface
     {
         List<AccountViewModel> GetAccounts();
         string Token { get; set; }
-        AccountViewModel GetAccount(int? id);
+        AccountViewModel GetAccount(int id);
         AccountViewModel Add(AccountViewModel account);
         AccountViewModel Update(AccountViewModel account);
         void Delete(int id);

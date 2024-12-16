@@ -1,5 +1,7 @@
 ﻿
 
+
+
 using Backend.DTO;
 
 namespace Backend.Services.Interfaces
@@ -8,7 +10,7 @@ namespace Backend.Services.Interfaces
     {
         bool Add(ClientDTO client);
         bool Update(ClientDTO client);
-        bool Remove(ClientDTO client);
+        void Remove(int id);
         ClientDTO Get(int id);
         List<ClientDTO> GetAll();
     }

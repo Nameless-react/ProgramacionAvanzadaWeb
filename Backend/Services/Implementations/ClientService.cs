@@ -60,10 +60,11 @@ namespace Backend.Services.Implementations
             return list;
         }
 
-        public bool Remove(ClientDTO client)
+        public void Remove(int id)
         {
-            Unidad.ClientDAL.Remove(Convertir(client));
-            return Unidad.Complete();
+            Client client = new Client{ ClientId = id };
+            Unidad.ClientDAL.Remove(client);
+            Unidad.Complete();
         }
 
         public bool Update(ClientDTO client)

@@ -31,6 +31,8 @@ namespace Frontend.Helpers.Implementations
 
         public ClientViewModel Add(ClientViewModel client)
         {
+            _ServiceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
+
             HttpResponseMessage response = _ServiceRepository.PostResponse("api/Client",Convertir(client));
             if(response.IsSuccessStatusCode)
             {
@@ -41,6 +43,8 @@ namespace Frontend.Helpers.Implementations
 
         public void Delete(int id)
         {
+            _ServiceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
+
             HttpResponseMessage responseMessage = _ServiceRepository.DeleteResponse("api/Client/" + id.ToString());
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -97,6 +101,8 @@ namespace Frontend.Helpers.Implementations
 
        public ClientViewModel Update(ClientViewModel client)
         {
+            _ServiceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
+
             HttpResponseMessage response = _ServiceRepository.PutResponse("api/Client/" + client.ClientId.ToString(), Convertir(client));
             if (response.IsSuccessStatusCode)
             {

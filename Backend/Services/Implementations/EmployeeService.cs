@@ -14,10 +14,11 @@ namespace Backend.Services.Implementations
             this.Unidad = unidadDeTrabajo;
         }
 
+
         #region Convert
         Employee Convert(EmployeeDTO employee)
         {
-            return new Employee
+            return new Employee()
             {
                 EmployeeId = employee.EmployeeID,
                 FirstName = employee.FirstName,
@@ -31,7 +32,7 @@ namespace Backend.Services.Implementations
             };
         }
 
-        EmployeeDTO Convert(Employee employee) 
+        EmployeeDTO Convert(Employee employee)
         {
             return new EmployeeDTO
             {
@@ -48,43 +49,43 @@ namespace Backend.Services.Implementations
         }
         #endregion
 
-        public bool Add(EmployeeDTO employee) 
+
+        public bool Add(EmployeeDTO employee)
         {
             Employee entity = Convert(employee);
             Unidad.EmployeeDAL.Add(entity);
             return Unidad.Complete();
-
         }
 
-        public bool Edit(EmployeeDTO employee) 
-        { 
+        public EmployeeDTO Get(int id)
+        {
+            return Convert(Unidad.EmployeeDAL.Get(id));
+            
+        }
+
+        public List<EmployeeDTO> GetAll()
+        {
+            List<EmployeeDTO> list = new List<EmployeeDTO>();
+            var employees = Unidad.EmployeeDAL.GetAll().ToList();
+            foreach ( var item in employees)
+            {
+                list.Add(Convert(item));
+            }
+            return list;
+        }
+
+        public void Remove(int id)
+        {
+            Employee employee = new Employee { EmployeeId = id };
+            Unidad.EmployeeDAL.Remove(employee);
+            Unidad.Complete();
+        }
+
+        public bool Update(EmployeeDTO employee)
+        {
             var entity = Convert(employee);
             Unidad.EmployeeDAL.Update(entity);
             return Unidad.Complete();
-        }
-
-        public bool Delete(EmployeeDTO employee) 
-        {
-            Unidad.EmployeeDAL.Remove(Convert(employee));
-            return Unidad.Complete();
-        }
-
-        public EmployeeDTO Get(int id) 
-        { 
-            return Convert(Unidad.EmployeeDAL.Get(id));
-        }
-
-        public List<EmployeeDTO> Get() 
-        { 
-            List<EmployeeDTO> list = new List<EmployeeDTO>();
-            var employees = Unidad.EmployeeDAL.GetAll().ToList();
-
-            foreach (var item in employees) 
-            { 
-                list.Add(Convert(item));
-            }
-
-            return list;
         }
     }
 }

@@ -4,20 +4,13 @@ namespace Backend.Services.Interfaces
 {
     public interface ITransactionService
     {
-        bool Add(TransactionDTO transaction);
+        TransactionDTO Add(TransactionDTO transaction);
         bool Edit(TransactionDTO transaction);
-        bool Delete(TransactionDTO transaction);
-        /// <summary>
-        /// Obtiene Category por Id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        void Remove(int id);
+       
         TransactionDTO Get(int id);
-        /// <summary>
-        /// Obtiene todas la categories
-        /// </summary>
-        /// <returns></returns>
-        List<TransactionDTO> Get();
+        
+        List<TransactionDTO> GetAll();
 
     }
 }

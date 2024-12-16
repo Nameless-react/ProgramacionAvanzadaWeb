@@ -13,11 +13,10 @@ namespace Backend.Services.Implementations
         {
             this.Unidad = unidadDeTrabajo;
         }
-
         #region Convert
         Transaction Convert(TransactionDTO transaction)
         {
-            return new Transaction
+            return new Transaction()
             {
                 TransactionId = transaction.TransactionId,
                 OriginAccountId = transaction.OriginAccountId,
@@ -28,7 +27,7 @@ namespace Backend.Services.Implementations
             };
         }
 
-        TransactionDTO Convert(Transaction transaction) 
+        TransactionDTO Convert(Transaction transaction)
         {
             return new TransactionDTO
             {
@@ -42,43 +41,56 @@ namespace Backend.Services.Implementations
         }
         #endregion
 
-        public bool Add(TransactionDTO transaction) 
+        public TransactionDTO Add(TransactionDTO transaction)
         {
-            Transaction entity = Convert(transaction);
-            Unidad.TransactionDAL.Add(entity);
-            return Unidad.Complete();
+            try
+            {
+                Unidad.TransactionDAL.Add(Convert(transaction));
 
+                Unidad.Complete();
+                return transaction;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public bool Edit(TransactionDTO transaction) 
-        { 
+        public bool Edit(TransactionDTO transaction)
+        {
             var entity = Convert(transaction);
             Unidad.TransactionDAL.Update(entity);
             return Unidad.Complete();
+
         }
 
-        public bool Delete(TransactionDTO transaction) 
+        public TransactionDTO Get(int id)
         {
-            Unidad.TransactionDAL.Remove(Convert(transaction));
-            return Unidad.Complete();
-        }
-
-        public TransactionDTO  Get(int id) 
-        { 
             return Convert(Unidad.TransactionDAL.Get(id));
+
         }
 
-        public List<TransactionDTO> Get() 
-        { 
+        public List<TransactionDTO> GetAll()
+        {
             List<TransactionDTO> list = new List<TransactionDTO>();
             var transactions = Unidad.TransactionDAL.GetAll().ToList();
 
-            foreach (var item in transactions) 
-            { 
+            foreach (var item in transactions)
+            {
                 list.Add(Convert(item));
             }
 
             return list;
+
         }
+
+        public void Remove(int id)
+        {
+            Transaction transaction = new Transaction { TransactionId = id };
+            Unidad.TransactionDAL.Remove(transaction);
+            Unidad.Complete();
+        }
+
+       
     }
 }
