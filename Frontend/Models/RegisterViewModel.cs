@@ -15,6 +15,10 @@ namespace Frontend.Models
 
         [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
+
+        [Required(ErrorMessage = "Phone number is required")]
+        public string PhoneNumber { get; set; }
+
         public List<string>? Roles { get; set; }
     }
 }

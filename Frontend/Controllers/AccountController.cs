@@ -19,6 +19,7 @@ namespace Frontend.Controllers
 
         public ActionResult Index() 
         {
+            System.Console.WriteLine(HttpContext.Session.GetString("userLogged"));
             _accountHelper.Token = HttpContext.Session.GetString("token");
             var list = _accountHelper.GetAccounts();
             return View(list);

@@ -12,13 +12,17 @@ namespace Backend.Controllers
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
+        private IAccessReportService _accessReportService { get; set; }
         private ITokenService TokenService;
 
-        public AuthController(UserManager<IdentityUser> userManager, ITokenService tokenService, RoleManager<IdentityRole> roleManager)
+
+
+        public AuthController(UserManager<IdentityUser> userManager, ITokenService tokenService, RoleManager<IdentityRole> roleManager, IAccessReportService accessReportService)
         {
             this.userManager = userManager;
             this.TokenService = tokenService;
-              this.roleManager = roleManager;
+            this.roleManager = roleManager;
+            this._accessReportService = accessReportService;
         }
 
        
@@ -38,8 +42,11 @@ namespace Backend.Controllers
             {
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
-                UserName = model.Username
+                UserName = model.Username,
+                PhoneNumber = model.PhoneNumber
             };
+
+
 
             var result = await userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
@@ -82,6 +89,16 @@ namespace Backend.Controllers
                 Usuario.Token = jwtToken;
                 Usuario.Roles = userRoles.ToList();
                 Usuario.Username = user.UserName;
+
+
+
+                _accessReportService.Add(new AccessReportDTO()
+                {
+                    //ClientId = 
+                    IpAddress  = "127.0.0.1",
+                    Success  = true,
+                    AccessDescription = "Login"
+                });
 
                 return Ok(Usuario);
             }

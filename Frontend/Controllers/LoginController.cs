@@ -15,6 +15,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNetCore.Authentication;
+using Frontend.Helpers.Implementations;
 
 
 namespace Frontend.Controllers
@@ -56,6 +57,7 @@ namespace Frontend.Controllers
                 {
                     var loging = securityHelper.Login(user);
                     TokenAPI tokenAPI = loging.Token;
+                    var loginResult = securityHelper.Login(user);
                     var EsValido = false;
 
                     if (tokenAPI != null)
@@ -70,6 +72,7 @@ namespace Frontend.Controllers
                         return View(user);
                     }
 
+                    HttpContext.Session.SetString("userLogged", loginResult.Username);
 
                     var claims = new List<Claim>() {
                         new Claim(ClaimTypes.NameIdentifier, loging.Username as string),

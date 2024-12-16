@@ -14,6 +14,7 @@ namespace Backend.DTO
         [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
 
+        public string PhoneNumber { get; set; }
         public TokenDTO? Token { get; set; }
 
         public List<string>? Roles { get; set; }

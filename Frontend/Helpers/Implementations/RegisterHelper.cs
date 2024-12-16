@@ -22,7 +22,7 @@ namespace Frontend.Helpers.Implementations
         {
             try
             {
-                HttpResponseMessage response = _serviceRepository.PostResponse("/api/Auth/Register", new { user.Username, user.Password, user.Email, user.Roles });
+                HttpResponseMessage response = _serviceRepository.PostResponse("/api/Auth/Register", new { user.Username, user.Password, user.Email, user.PhoneNumber, user.Roles });
                 var content = response.Content.ReadAsStringAsync().Result;
                 RegisterAPI registerAPI = JsonConvert.DeserializeObject<RegisterAPI>(content);
                 return registerAPI;
