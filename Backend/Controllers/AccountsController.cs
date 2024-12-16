@@ -52,11 +52,9 @@ namespace Backend.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            AccountDTO account = new AccountDTO
-            {
-                AccountId = id
-            };
-            _accountService.Remove(account);
+           System.Console.WriteLine(id);
+
+            _accountService.Remove(id);
         }
     }
 }

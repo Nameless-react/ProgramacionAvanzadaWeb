@@ -1,9 +1,9 @@
-﻿using Frontend.Helpers.Interface;
-using FrontEnd.Helpers.Implementations;
+﻿using Frontend.ApiModel;
+using Frontend.Helpers.Interface;
 using Frontend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Frontend.Controllers
 {

@@ -1,16 +1,17 @@
 ﻿using Frontend.ApiModel;
 using Frontend.Helpers.Interface;
 using Frontend.Models;
+using FrontEnd.Helpers.Implementations;
 using FrontEnd.Helpers.Interfaces;
 using Newtonsoft.Json;
-using System.ComponentModel;
 
 namespace FrontEnd.Helpers.Implementations
 {
     public class EmployeeHelper : IEmployeeHelper
     {
-        IServiceRepository _ServiceRepository;
         public string Token { get; set; }
+
+        IServiceRepository _ServiceRepository;
         public EmployeeHelper(IServiceRepository serviceRepository)
         {
             _ServiceRepository = serviceRepository;
@@ -35,6 +36,8 @@ namespace FrontEnd.Helpers.Implementations
 
         public EmployeeViewModel AddEmployee(EmployeeViewModel employee)
         {
+            _ServiceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
+
             HttpResponseMessage response = _ServiceRepository.PostResponse("api/Employee", Convertir(employee));
             if (response.IsSuccessStatusCode)
             {
@@ -45,6 +48,8 @@ namespace FrontEnd.Helpers.Implementations
 
         public void DeleteEmployee(int id)
         {
+            _ServiceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
+
             HttpResponseMessage responseMessage = _ServiceRepository.DeleteResponse("api/Employee/" + id.ToString());
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -110,7 +115,9 @@ namespace FrontEnd.Helpers.Implementations
 
         public EmployeeViewModel UpdateEmployee(EmployeeViewModel employee)
         {
-            HttpResponseMessage response = _ServiceRepository.PutResponse("api/Client/" + employee.EmployeeID.ToString(), Convertir(employee));
+            _ServiceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
+
+            HttpResponseMessage response = _ServiceRepository.PutResponse("api/Employee/" + employee.EmployeeID.ToString(), Convertir(employee));
             if (response.IsSuccessStatusCode)
             {
                 var content = response.Content.ReadAsStringAsync().Result;

@@ -16,21 +16,21 @@ namespace Backend.Services.Implementations
             this.Unidad = unidadDeTrabajo;
         }
 
-        private Account Convertir(AccountDTO accountDTO)
+        Account Convertir(AccountDTO account)
         {
 
-            return new Account
+            return new Account()
             {
-                AccountId = accountDTO.AccountId,
-                AccountNumber = accountDTO.AccountNumber,
-                ClientId = accountDTO.ClientId,
-                AccountTypeId = accountDTO.AccountTypeId,
-                Balance = accountDTO.Balance,
-                OpeningDate = accountDTO.OpeningDate
+                AccountId = account.AccountId,
+                AccountNumber = account.AccountNumber,
+                ClientId = account.ClientId,
+                AccountTypeId = account.AccountTypeId,
+                Balance = account.Balance,
+                OpeningDate = account.OpeningDate
             };
         }
 
-         AccountDTO Convertir(Account account)
+        AccountDTO Convertir(Account account)
         {
             return new AccountDTO
             {
@@ -44,16 +44,16 @@ namespace Backend.Services.Implementations
             };
         }
 
-        public bool Add(AccountDTO accountDTO)
+        public bool Add(AccountDTO account)
         {
-            Account entity = Convertir(accountDTO);
+            Account entity = Convertir(account);
             Unidad.AccountDAL.Add(entity);
             return Unidad.Complete();
         }
 
         public AccountDTO Get(int id)
         {
-            
+
             Account account = Unidad.AccountDAL.Get(id);
             AccountType accountType = Unidad.AccountTypeDAL.Get(account.AccountTypeId);
             Client client = Unidad.ClientDAL.Get(account.ClientId);
@@ -62,7 +62,6 @@ namespace Backend.Services.Implementations
 
             return Convertir(account);
         }
-
         public List<AccountDTO> GetAll()
         {
             List<AccountDTO> list = new List<AccountDTO>();
@@ -74,16 +73,16 @@ namespace Backend.Services.Implementations
             }
             return list;
         }
-
-        public bool Remove(AccountDTO accountDTO)
+        public bool Remove(int id)
         {
-            Unidad.AccountDAL.Remove(Convertir(accountDTO));
+            Account account = new Account { AccountId = id };
+            Unidad.AccountDAL.Remove(account);
             return Unidad.Complete();
         }
 
-        public bool Update(AccountDTO accountDTO)
+        public bool Update(AccountDTO account)
         {
-            var entity = Convertir(accountDTO);
+            var entity = Convertir(account);
             Unidad.AccountDAL.Update(entity);
             return Unidad.Complete();
         }

@@ -1,59 +1,56 @@
-﻿@model Frontend.ApiModel.AccessReport
+﻿@model Frontend.Models.AccountViewModel
 
 @{
-    ViewData["Title"] = "Detalles de Reporte de Acceso";
+    ViewData["Title"] = "Details";
 }
 
-<h1 class="text-center fw-bold">Detalles de Reporte de Acceso</h1>
+<h1 class="text-center fw-bold">Detalles de Cuentas</h1>
 
 <div class="p-4 mt-4" style="background-color: white; border-radius: 10px; max-width: 800px; margin: 0 auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+    
+   
     <dl class="row">
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AccessReportId)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AccountId)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AccessReportId)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AccountId)
         </dd>
-
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ClientID)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AccountNumber)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ClientID)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AccountNumber)
         </dd>
-
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AccessDate)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ClientId)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AccessDate)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ClientId)
         </dd>
-
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.IPAddress)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AccountTypeId)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.IPAddress)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AccountTypeId)
         </dd>
-
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Success)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Balance)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Success)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Balance)
         </dd>
-
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AccessDescription)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OpeningDate)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AccessDescription)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OpeningDate)
         </dd>
     </dl>
 </div>
 
 <div class="text-center mt-4">
-    <a href="@Url.Action("Edit", new { id = Model.AccessReportId })" class="btn btn-success">Editar</a>
-    <a href="@Url.Action("Index", "AccessReport")" class="btn btn-info">Volver a la lista de Reportes</a>
+    <a href="@Url.Action("Edit", new { id = Model.AccountId })" class="btn btn-success">Editar</a>
+    <a href="@Url.Action("Index", "Account")" class="btn btn-info">Volver a la lista de Cuentas</a>
 </div>

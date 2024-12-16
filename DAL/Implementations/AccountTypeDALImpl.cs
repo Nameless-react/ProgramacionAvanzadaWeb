@@ -10,7 +10,7 @@ namespace DAL.Implementations
 {
     public class AccountTypeDALImpl : DALGenericoImpl<AccountType>, IAccountTypeDAL
     {
-        private readonly ProyectoWebAvanzadaContext context;
+       ProyectoWebAvanzadaContext context;
 
         public AccountTypeDALImpl(ProyectoWebAvanzadaContext context) : base(context)
         {

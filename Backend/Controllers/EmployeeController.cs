@@ -1,59 +1,61 @@
 ﻿using Backend.DTO;
 using Backend.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class EmployeeController :ControllerBase
+    public class EmployeeController : ControllerBase
     {
         IEmployeeService employeeService;
 
-        public EmployeeController(IEmployeeService employeeService) 
+        public EmployeeController(IEmployeeService employeeService)
         {
             this.employeeService = employeeService;
-        }
 
+        }
+        // GET: api/<EmployeeController>
         [HttpGet]
-        public IEnumerable<EmployeeDTO> Get() 
-        { 
-            return employeeService.Get();
+        public ActionResult Get()
+        {
+            var result = employeeService.GetAll();
+            return Ok(result);
         }
 
+        // GET api/<EmployeeController>/5
         [HttpGet("{id}")]
-        public EmployeeDTO Get(int id)
+        public ActionResult Get(int id)
         {
-            return employeeService.Get(id);
+            var result = employeeService.Get(id);
+            return Ok(result);
         }
 
+        // POST api/<EmployeeController>
         [HttpPost]
-        public IActionResult Post([FromBody] EmployeeDTO employee)
+        public void Post([FromBody] EmployeeDTO employeeDTO)
         {
-            employeeService.Add(employee);
-
-            return Ok(employee);
+            employeeService.Add(employeeDTO);
         }
 
-        [HttpPut]
-        public IActionResult Put([FromBody] EmployeeDTO employee)
+        // PUT api/<EmployeeController>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] EmployeeDTO employee)
         {
-            employeeService.Edit(employee);
-            return Ok(employee);
-
+            employeeService.Update(employee);
         }
 
+        // DELETE api/<EmployeeController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            EmployeeDTO employee = new EmployeeDTO
-            {
-                EmployeeID = id
-            };
-            employeeService.Delete(employee);
+            System.Console.WriteLine(id);
+
+            employeeService.Remove(id);
         }
     }
 }

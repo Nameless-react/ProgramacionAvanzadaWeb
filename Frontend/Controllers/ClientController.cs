@@ -1,4 +1,5 @@
-﻿using Frontend.Helpers.Interface;
+﻿using Frontend.ApiModel;
+using Frontend.Helpers.Interface;
 using Frontend.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -96,6 +97,7 @@ namespace Frontend.Controllers
         {
             try
             {
+                
                 _clientHelper.Token = HttpContext.Session.GetString("token");
                 _clientHelper.Delete(client.ClientId);
                 return RedirectToAction(nameof(Index));

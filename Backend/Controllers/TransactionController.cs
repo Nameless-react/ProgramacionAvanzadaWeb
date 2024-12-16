@@ -1,7 +1,6 @@
 ﻿using Backend.DTO;
 using Backend.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
@@ -19,41 +18,40 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<TransactionDTO> Get() 
+        public ActionResult Get() 
         { 
-            return transactionService.Get();
+            var result = transactionService.GetAll();
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public TransactionDTO Get(int id)
+        public ActionResult Get(int id)
         {
-            return transactionService.Get(id);
+            var result = transactionService.Get(id);
+            return Ok(result);
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] TransactionDTO transaction)
+        public void Post([FromBody] TransactionDTO transactionDTO)
         {
-            transactionService.Add(transaction);
+            transactionService.Add(transactionDTO);
 
-            return Ok(transaction);
+
         }
 
-        [HttpPut]
-        public IActionResult Put([FromBody] TransactionDTO transaction)
+        [HttpPut("{id}")]
+        public void Put(int id,[FromBody] TransactionDTO transaction)
         {
             transactionService.Edit(transaction);
-            return Ok(transaction);
+            
 
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            TransactionDTO transaction = new TransactionDTO
-            {
-                TransactionId = id
-            };
-            transactionService.Delete(transaction);
+            
+            transactionService.Remove(id);
         }
     }
 }

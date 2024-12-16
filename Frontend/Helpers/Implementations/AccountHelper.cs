@@ -9,13 +9,15 @@ namespace Frontend.Helpers.Implementations
 {
     public class AccountHelper : IAccountHelper
     {
-        IServiceRepository _serviceRepository;
+
         public string Token { get; set; }
 
+        IServiceRepository _ServiceRepository;
+        
 
         public AccountHelper(IServiceRepository serviceRepository)
         {
-            _serviceRepository = serviceRepository;
+            _ServiceRepository = serviceRepository;
         }
         Account Convert(AccountViewModel account)
         {
@@ -33,7 +35,9 @@ namespace Frontend.Helpers.Implementations
 
         public AccountViewModel Add(AccountViewModel account)
         {
-            HttpResponseMessage response = _serviceRepository.PostResponse("api/Accounts", Convert(account));
+            _ServiceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
+
+            HttpResponseMessage response = _ServiceRepository.PostResponse("api/Accounts", Convert(account));
             if (response.IsSuccessStatusCode)
             {
                 var content = response.Content.ReadAsStringAsync().Result;
@@ -43,7 +47,9 @@ namespace Frontend.Helpers.Implementations
 
         public void Delete(int id)
         {
-            HttpResponseMessage responseMessage = _serviceRepository.DeleteResponse("api/Accounts/" + id.ToString());
+            _ServiceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
+
+            HttpResponseMessage responseMessage = _ServiceRepository.DeleteResponse("api/Accounts/" + id.ToString());
             if (responseMessage.IsSuccessStatusCode)
             {
                 var content = responseMessage.Content;
@@ -53,8 +59,8 @@ namespace Frontend.Helpers.Implementations
         public List<AccountViewModel> GetAccounts()
         {
 
-            _serviceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
-            HttpResponseMessage responseMessage = _serviceRepository.GetResponse("api/Accounts");
+            _ServiceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
+            HttpResponseMessage responseMessage = _ServiceRepository.GetResponse("api/Accounts");
             List<Account> accounts = new List<Account>();
             if (responseMessage != null)
             {
@@ -81,10 +87,10 @@ namespace Frontend.Helpers.Implementations
             return result;
         }
 
-        public AccountViewModel GetAccount(int? id) 
+        public AccountViewModel GetAccount(int id) 
         {
-            _serviceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
-            HttpResponseMessage responseMessage = _serviceRepository.GetResponse("api/Accounts/" + id.ToString());
+            _ServiceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
+            HttpResponseMessage responseMessage = _ServiceRepository.GetResponse("api/Accounts/" + id.ToString());
             Account account = new Account();
             if (responseMessage != null) 
             {
@@ -107,7 +113,9 @@ namespace Frontend.Helpers.Implementations
 
         public AccountViewModel Update(AccountViewModel account) 
         {
-            HttpResponseMessage response = _serviceRepository.PutResponse("api/Accounts/" + account.AccountId.ToString(), Convert(account));
+            _ServiceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
+
+            HttpResponseMessage response = _ServiceRepository.PutResponse("api/Accounts/" + account.AccountId.ToString(), Convert(account));
             if (response.IsSuccessStatusCode) 
             {
                 var content = response.Content.ReadAsStringAsync().Result;

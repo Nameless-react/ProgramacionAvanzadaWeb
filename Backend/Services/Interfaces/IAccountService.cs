@@ -7,7 +7,7 @@ namespace Backend.Services.Interfaces
 
         bool Add(AccountDTO account);
         bool Update(AccountDTO account);
-        bool Remove(AccountDTO account);
+        bool Remove(int id);
         AccountDTO Get(int id);
         List<AccountDTO> GetAll();
     
