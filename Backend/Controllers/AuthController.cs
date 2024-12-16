@@ -92,17 +92,17 @@ namespace Backend.Controllers
 
 
 
-                _accessReportService.Add(new AccessReportDTO()
+                /*_accessReportService.Add(new AccessReportDTO()
                 {
                     //ClientId = 
                     IpAddress  = "127.0.0.1",
                     Success  = true,
                     AccessDescription = "Login"
                 });
-
+                */
                 return Ok(Usuario);
             }
-
+                
 
             return Unauthorized();
         }

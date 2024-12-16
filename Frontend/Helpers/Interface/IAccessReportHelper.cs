@@ -11,5 +11,6 @@ namespace Frontend.Helpers.Interface
         string Token { get; set; }
         AccessReportViewModel GetReport(int id);
        
+        AccessReportViewModel Add(AccessReportViewModel access);
     }
 }

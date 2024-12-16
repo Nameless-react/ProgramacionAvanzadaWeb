@@ -42,30 +42,14 @@ namespace Backend.Services.Implementations
         }
         #endregion
 
-        public bool Add(AccessReportDTO dto)
+
+        public bool Add(AccessReportDTO accessReport)
         {
-            var entity = Convert(dto);
+            AccessReport entity = Convert(accessReport);
             _unidad.AccessReportDAL.Add(entity);
             return _unidad.Complete();
         }
 
-        public bool Edit(AccessReportDTO dto)
-        {
-            var entity = Convert(dto);
-            _unidad.AccessReportDAL.Update(entity);
-            return _unidad.Complete();
-        }
-
-        public bool Delete(int id)
-        {
-            var entity = _unidad.AccessReportDAL.Get(id);
-            if (entity != null)
-            {
-                _unidad.AccessReportDAL.Remove(entity);
-                return _unidad.Complete();
-            }
-            return false;
-        }
 
         public AccessReportDTO Get(int id)
         {
@@ -75,8 +59,15 @@ namespace Backend.Services.Implementations
 
         public List<AccessReportDTO> Get()
         {
-            var entities = _unidad.AccessReportDAL.GetAll().ToList();
-            return entities.Select(Convert).ToList();
+            List<AccessReportDTO> list = new List<AccessReportDTO>();
+            var access = _unidad.AccessReportDAL.GetAll().ToList();
+
+            foreach (var item in access)
+            {
+                list.Add(Convert(item));
+            }
+            return list;
+
         }
     }
 }

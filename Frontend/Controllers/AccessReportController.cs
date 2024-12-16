@@ -28,6 +28,11 @@ namespace Frontend.Controllers
             return View(reports);
         }
 
+        public ActionResult Create()
+        {
+            _accessReportHelper.Token = HttpContext.Session.GetString("token");
+            return View();
+        }
 
     }
 }
