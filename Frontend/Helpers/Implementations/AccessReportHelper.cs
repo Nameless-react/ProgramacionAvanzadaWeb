@@ -92,6 +92,17 @@ namespace Frontend.Helpers.Implementations
             return result;
         }
 
+        public AccessReportViewModel Add(AccessReportViewModel access)
+        {
+            _serviceRepository.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
+
+            HttpResponseMessage response = _serviceRepository.PostResponse("api/AccessReport", Convert(access));
+            if (response.IsSuccessStatusCode)
+            {
+                var content = response.Content.ReadAsStringAsync().Result;
+            }
+            return access;
+        }
 
     }
 }
